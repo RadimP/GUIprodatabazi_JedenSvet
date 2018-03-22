@@ -321,6 +321,17 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 break;
             default:
                 break;
+            case 1:
+              for (int i = 0; i < edited_fields1.size(); i++) {
+                  String columnname = jTablePredstaveniZobrazenivybranychDat.getModel().getColumnName(edited_fields1.get(i).get(1));
+                    String sql_dotaz = "UPDATE film SET " +columnname +"=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), edited_fields1.get(i).get(1))+"\" " + "WHERE film.idFilm=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), 0) + "\"" + ";";
+                    System.out.println(sql_dotaz);
+                    executeStatement(sql_dotaz);
+                    
+                    updateDisplayedData(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
+                    JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
+                };  
+             break;   
         }
 
     }//GEN-LAST:event_jButtonPredstaveniAktualizujVDTBActionPerformed

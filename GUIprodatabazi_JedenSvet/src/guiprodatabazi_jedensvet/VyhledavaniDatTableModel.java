@@ -5,43 +5,40 @@
  */
 package guiprodatabazi_jedensvet;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
 import java.util.Vector;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author RadimP
  */
-public class ZobrazeniDatTableModel extends AbstractTableModel  {
-
+public class VyhledavaniDatTableModel extends AbstractTableModel{
     Vector<Object> col; //column names from database
     Vector<Vector<Object>> data; //vector to populate table with data from database 
 DataFromDatabase datafromdtb = new DataFromDatabase();
-ZobrazeniDatTableModel() {
-    String empty ="";
-   col = new Vector<Object>();
+VyhledavaniDatTableModel(String sqldotaz, String empty) {
+    empty = null; 
+    col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
+    Vector<Object> columnvalues = new Vector<>();
     data = new Vector<Vector<Object>>();
-    for (int i=0; i<4; i++) {col.addElement(empty);}
-    for (int i=0; i<1; i++) {data.addElement(col);}
+        for (Object col1 : col) {
+            columnvalues.addElement(null);
         }
-    ZobrazeniDatTableModel(String sqldotaz) {
+    for (int i=0; i<5; i++) {data.addElement(columnvalues);}
+        }
+    VyhledavaniDatTableModel(String sqldotaz) {
          col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
          data = datafromdtb.getDataFromSQLDatabase(sqldotaz);
     }
     /**
      * 
-     * @param sqldotaz
-     * @param conversion 
+     * @param sqldotaz setting, what shoudl be displayed in the table
+     * @param conversion arbitrary int value which indicates, that displayed dates in the 2nd column should follow czech convetional format for dates (dd.MM.yy) 
      */
-    ZobrazeniDatTableModel(String sqldotaz, int conversion) {
-         col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
+    VyhledavaniDatTableModel(String sqldotaz, int conversion) {
+    col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
          data = datafromdtb.getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(sqldotaz);
+       
     }
 
     @Override
@@ -64,21 +61,20 @@ ZobrazeniDatTableModel() {
 }
     @Override
     public Class getColumnClass(int column) {
-                for (int row = 0; row < getRowCount(); row++) {
-                    Object o = getValueAt(row, column);
+                     
+                        for (int row = 0; row < getRowCount(); row++) {
+                            Object o = getValueAt(row, column);
+                            if (o != null) {
+                                return o.getClass();
+                            } 
+                        }
 
-                    if (o != null) {
-                        return o.getClass();
-                    } 
-                }
-
-                return Object.class;
-            }
+                        return Object.class;
+                    }
 @Override
 public boolean isCellEditable(int rowIndex, int columnIndex)
 {
     return false;
 }
     
-
 }

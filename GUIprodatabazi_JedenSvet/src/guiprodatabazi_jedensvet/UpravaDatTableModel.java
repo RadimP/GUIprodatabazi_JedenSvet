@@ -37,7 +37,11 @@ public class UpravaDatTableModel extends AbstractTableModel {
         data = datafromdtb.getDataFromSQLDatabase(sqldotaz);
     }
 
-    public ArrayList<ArrayList<Integer>> getIndexesOfEditedFields() {
+    UpravaDatTableModel(String sqldotaz, int conversion) {
+        col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
+        data = datafromdtb.getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(sqldotaz);
+    }
+    public ArrayList<ArrayList<Integer>> getIndicesOfEditedFields() {
         return edited_fields;
     }
 
@@ -85,11 +89,11 @@ public class UpravaDatTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        ArrayList<Integer> indexes = new ArrayList<Integer>();
+        ArrayList<Integer> indices = new ArrayList<Integer>();
         data.elementAt(rowIndex).setElementAt(aValue, columnIndex);
-        indexes.add(rowIndex);
-        indexes.add(columnIndex);
-        edited_fields.add(indexes);
+        indices.add(rowIndex);
+        indices.add(columnIndex);
+        edited_fields.add(indices);
     }
 
 }

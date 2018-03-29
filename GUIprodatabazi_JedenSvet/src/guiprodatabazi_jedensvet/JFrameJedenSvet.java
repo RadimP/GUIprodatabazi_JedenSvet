@@ -37,6 +37,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     ZobrazeniDatTableModel tablemodel_kino_dtb;
     PridavaniDatTableModel tablemodel_predstaveni_pridavanidat;
     UpravaDatTableModel emptytable_predstaveni;
+    UpravaDatTableModel emptytable_film;
     VyhledavaniDatTableModel emptyresulttable_predstaveni;
     VyhledavaniDatTableModel tablemodel_predstaveni_results;
     int switch_casenumber_predstaveni;
@@ -70,11 +71,13 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         tablemodel_predstaveni_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_PREDSTAVENI, 1);
         tablemodel_predstaveni_pridavanidat = new PridavaniDatTableModel();
         emptytable_predstaveni = new UpravaDatTableModel();
+        emptytable_film = new UpravaDatTableModel();
         emptyresulttable_predstaveni = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, "");
         tablemodel_predstaveni_results = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, 1);
+        tablemodel_film_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_FILM, 1);
         initComponents();
       jTablePredstaveniZobrazenivybranychDat.setModel(emptytable_predstaveni);
-        // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniDatafromDTB);
+      HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmDataFromDTB);
         // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
         // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniPridaniDat);
         //  HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniVysledkyVyhledavani);
@@ -136,6 +139,18 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         jLabelPredstaveniDatavDTB = new javax.swing.JLabel();
         jButtonPredstaveniVyberData = new javax.swing.JButton();
         jPanelFilmHlavni = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableFilmDataFromDTB = new javax.swing.JTable();
+        jTabbedPaneFilmVnoreny = new javax.swing.JTabbedPane();
+        jPanelFilmUpravaDat = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableFilmZobrazeniVybranychDat = new javax.swing.JTable();
+        jLabelFilmPopisAktualizace = new javax.swing.JLabel();
+        jButtonFilmAktualizujVDTB = new javax.swing.JButton();
+        jPanelFilmPridavaniDat = new javax.swing.JPanel();
+        jPanelFilmVyhledavaniDat = new javax.swing.JPanel();
+        jLabelFilmDatavDTB = new javax.swing.JLabel();
+        jButtonFilmVyberData = new javax.swing.JButton();
         jPanelKinoHlavni = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -607,15 +622,128 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
         jPanelFilmHlavni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jTableFilmDataFromDTB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableFilmDataFromDTB.setModel(tablemodel_film_dtb);
+        jTableFilmDataFromDTB.setCellSelectionEnabled(true);
+        jTableFilmDataFromDTB.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableFilmDataFromDTB.getTableHeader().setReorderingAllowed(false);
+        HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniDatafromDTB);
+        jScrollPane4.setViewportView(jTableFilmDataFromDTB);
+
+        jTabbedPaneFilmVnoreny.setUI(new BasicTabbedPaneUI() {
+            @Override
+            protected void installDefaults() {
+                super.installDefaults();
+                highlight = Color.LIGHT_GRAY;
+                lightHighlight = Color.LIGHT_GRAY;
+                shadow = Color.LIGHT_GRAY;
+                darkShadow = Color.LIGHT_GRAY;
+                focus = Color.LIGHT_GRAY;
+            }
+        });
+        jTabbedPaneFilmVnoreny.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTabbedPaneFilmVnoreny.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPaneFilmVnoreny.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jTableFilmZobrazeniVybranychDat.setModel(emptytable_film);
+        jScrollPane7.setViewportView(jTableFilmZobrazeniVybranychDat);
+
+        jLabelFilmPopisAktualizace.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelFilmPopisAktualizace.setText("Popis k vybrané položce");
+
+        jButtonFilmAktualizujVDTB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonFilmAktualizujVDTB.setText("Aktualizovat v DTB");
+
+        javax.swing.GroupLayout jPanelFilmUpravaDatLayout = new javax.swing.GroupLayout(jPanelFilmUpravaDat);
+        jPanelFilmUpravaDat.setLayout(jPanelFilmUpravaDatLayout);
+        jPanelFilmUpravaDatLayout.setHorizontalGroup(
+            jPanelFilmUpravaDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFilmUpravaDatLayout.createSequentialGroup()
+                .addGroup(jPanelFilmUpravaDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelFilmUpravaDatLayout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addGroup(jPanelFilmUpravaDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelFilmPopisAktualizace)))
+                    .addGroup(jPanelFilmUpravaDatLayout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(jButtonFilmAktualizujVDTB)))
+                .addContainerGap(169, Short.MAX_VALUE))
+        );
+        jPanelFilmUpravaDatLayout.setVerticalGroup(
+            jPanelFilmUpravaDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFilmUpravaDatLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabelFilmPopisAktualizace)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonFilmAktualizujVDTB)
+                .addContainerGap(175, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneFilmVnoreny.addTab("Úprava dat", jPanelFilmUpravaDat);
+
+        javax.swing.GroupLayout jPanelFilmPridavaniDatLayout = new javax.swing.GroupLayout(jPanelFilmPridavaniDat);
+        jPanelFilmPridavaniDat.setLayout(jPanelFilmPridavaniDatLayout);
+        jPanelFilmPridavaniDatLayout.setHorizontalGroup(
+            jPanelFilmPridavaniDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 773, Short.MAX_VALUE)
+        );
+        jPanelFilmPridavaniDatLayout.setVerticalGroup(
+            jPanelFilmPridavaniDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 405, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneFilmVnoreny.addTab("Přidávání filmů", jPanelFilmPridavaniDat);
+
+        javax.swing.GroupLayout jPanelFilmVyhledavaniDatLayout = new javax.swing.GroupLayout(jPanelFilmVyhledavaniDat);
+        jPanelFilmVyhledavaniDat.setLayout(jPanelFilmVyhledavaniDatLayout);
+        jPanelFilmVyhledavaniDatLayout.setHorizontalGroup(
+            jPanelFilmVyhledavaniDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 773, Short.MAX_VALUE)
+        );
+        jPanelFilmVyhledavaniDatLayout.setVerticalGroup(
+            jPanelFilmVyhledavaniDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 405, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneFilmVnoreny.addTab("Vyhledávání filmů", jPanelFilmVyhledavaniDat);
+
+        jLabelFilmDatavDTB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelFilmDatavDTB.setText("Tabulka Film - data v databázi");
+
+        jButtonFilmVyberData.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonFilmVyberData.setText("Vyber označená data");
+
         javax.swing.GroupLayout jPanelFilmHlavniLayout = new javax.swing.GroupLayout(jPanelFilmHlavni);
         jPanelFilmHlavni.setLayout(jPanelFilmHlavniLayout);
         jPanelFilmHlavniLayout.setHorizontalGroup(
             jPanelFilmHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1101, Short.MAX_VALUE)
+            .addGroup(jPanelFilmHlavniLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelFilmHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelFilmDatavDTB)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonFilmVyberData))
+                .addGap(313, 313, 313))
+            .addGroup(jPanelFilmHlavniLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jTabbedPaneFilmVnoreny, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(166, 166, 166))
         );
         jPanelFilmHlavniLayout.setVerticalGroup(
             jPanelFilmHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 804, Short.MAX_VALUE)
+            .addGroup(jPanelFilmHlavniLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabelFilmDatavDTB)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jButtonFilmVyberData)
+                .addGap(66, 66, 66)
+                .addComponent(jTabbedPaneFilmVnoreny, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTabbedPaneSpolecny.addTab("Film", jPanelFilmHlavni);
@@ -977,6 +1105,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonFilmAktualizujVDTB;
+    private javax.swing.JButton jButtonFilmVyberData;
     private javax.swing.JButton jButtonPredstaveniAktualizujVDTB;
     private javax.swing.JButton jButtonPredstaveniPopisFilmuDoTabulky;
     private javax.swing.JButton jButtonPredstaveniPridatData;
@@ -994,6 +1124,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPredstaveniVyhledavaniidPredstaveniJeRovno;
     private javax.swing.JButton jButtonPredstaveniVyhledavaniidPredstaveniJeVetsi;
     private javax.swing.JButton jButtonPredstaveniVyhledavavniOdstranitVysledky;
+    private javax.swing.JLabel jLabelFilmDatavDTB;
+    private javax.swing.JLabel jLabelFilmPopisAktualizace;
     private javax.swing.JLabel jLabelPredstaveniDatavDTB;
     private javax.swing.JLabel jLabelPredstaveniPopisAktualizace;
     private javax.swing.JLabel jLabelPredstaveniPridaniDat;
@@ -1004,6 +1136,9 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPredstaveniVyhledavaniidFilmu;
     private javax.swing.JLabel jLabelPredstaverniVyhledavaniDatum;
     private javax.swing.JPanel jPanelFilmHlavni;
+    private javax.swing.JPanel jPanelFilmPridavaniDat;
+    private javax.swing.JPanel jPanelFilmUpravaDat;
+    private javax.swing.JPanel jPanelFilmVyhledavaniDat;
     private javax.swing.JPanel jPanelKinoHlavni;
     private javax.swing.JPanel jPanelPredstaveniHlavni;
     private javax.swing.JPanel jPanelPredstaveniPridavaniDat;
@@ -1012,12 +1147,17 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSpinner jSpinnerPredstaveniVyhledavaniidFilm;
     private javax.swing.JSpinner jSpinnerPredstaveniVyhledavaniidPredstaveni;
+    private javax.swing.JTabbedPane jTabbedPaneFilmVnoreny;
     private javax.swing.JTabbedPane jTabbedPanePredstaveniVnoreny;
     private javax.swing.JTabbedPane jTabbedPaneSpolecny;
+    private javax.swing.JTable jTableFilmDataFromDTB;
+    private javax.swing.JTable jTableFilmZobrazeniVybranychDat;
     private javax.swing.JTable jTablePredstaveniDatafromDTB;
     private javax.swing.JTable jTablePredstaveniPridaniDat;
     private javax.swing.JTable jTablePredstaveniVysledkyVyhledavani;

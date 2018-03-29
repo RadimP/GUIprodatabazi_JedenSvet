@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -38,13 +39,17 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     UpravaDatTableModel emptytable_predstaveni;
     VyhledavaniDatTableModel emptyresulttable_predstaveni;
     VyhledavaniDatTableModel tablemodel_predstaveni_results;
-    int switchcase_reference_number;
+    int switch_casenumber_predstaveni;
     int predstaveni_popis_filmu_selectedrow_index;
     int predstaveni_popis_filmu_selectedcolumn_index;
+    String[] namesofDTBtables = {"predstaveni", "film", "kino"};
+    String[] namesofcolumns_predstavenitable = {"idPredstaveni", "Datum", "idFilm"};
+    String[] namesofcolumns_filmtable = {"idFilm", "JmenoF", "Reziser", "Rok", "Popis"};
+    String[] namesofcolumns_kinotable = {"idKino", "Nazev", "Ulice", "C.popisne", "C.orientacni", "Obec", "PSC", "idPredstaveni"};
     String performed_querry_predstaveni_film_by_date = null;
     String performed_querry_predstaveni_vyhledavani = null;
-    ArrayList<ArrayList<Integer>> edited_fields1 = new ArrayList<ArrayList<Integer>>();
-    ArrayList<Integer> edited_rows1 = new ArrayList<Integer>();
+    ArrayList<ArrayList<Integer>> edited_fields_predstaveni_tab = new ArrayList<ArrayList<Integer>>();
+    ArrayList<Integer> edited_rows_predstaveni_tab = new ArrayList<Integer>();
     static final String SQLDOTAZ_PREDSTAVENI = "SELECT idPredstaveni, Datum, idFilm FROM jeden_svet.predstaveni;";
     static final String SQLDOTAZ_FILM = "SELECT * FROM jeden_svet.film;";
     static final String SQLDOTAZ_KINO = "SELECT * FROM jeden_svet.kino;";
@@ -68,11 +73,12 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         emptyresulttable_predstaveni = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, "");
         tablemodel_predstaveni_results = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, 1);
         initComponents();
-       // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniDatafromDTB);
-       // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
-      // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniPridaniDat);
-      //  HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniVysledkyVyhledavani);
-       JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
+      jTablePredstaveniZobrazenivybranychDat.setModel(emptytable_predstaveni);
+        // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniDatafromDTB);
+        // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
+        // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniPridaniDat);
+        //  HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniVysledkyVyhledavani);
+        JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
     }
 
     /**
@@ -135,7 +141,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Databáze Jeden svět");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jTabbedPaneSpolecny.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPaneSpolecny.setUI(new BasicTabbedPaneUI() {
@@ -183,9 +189,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         jLabelPredstaveniPopisAktualizace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPredstaveniPopisAktualizace.setText("Podrobnosti k vybrané položce");
 
-        HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
         jTablePredstaveniZobrazenivybranychDat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTablePredstaveniZobrazenivybranychDat.setModel(emptytable_predstaveni);
         jTablePredstaveniZobrazenivybranychDat.setCellSelectionEnabled(true);
         jTablePredstaveniZobrazenivybranychDat.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTablePredstaveniZobrazenivybranychDat.getTableHeader().setReorderingAllowed(false);
@@ -459,7 +463,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 .addGroup(jPanelPredstaveniVyhledavaniDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelPredstaveniVyhledavaniDatLayout.createSequentialGroup()
                         .addGap(373, 373, 373)
-                        .addComponent(jSpinnerPredstaveniVyhledavaniidFilm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSpinnerPredstaveniVyhledavaniidFilm, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                         .addGap(147, 147, 147))
                     .addGroup(jPanelPredstaveniVyhledavaniDatLayout.createSequentialGroup()
                         .addGroup(jPanelPredstaveniVyhledavaniDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,13 +581,13 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         jPanelPredstaveniHlavniLayout.setHorizontalGroup(
             jPanelPredstaveniHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPredstaveniHlavniLayout.createSequentialGroup()
-                .addContainerGap(402, Short.MAX_VALUE)
+                .addContainerGap(228, Short.MAX_VALUE)
                 .addGroup(jPanelPredstaveniHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelPredstaveniDatavDTB)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPredstaveniVyberData)
                     .addComponent(jTabbedPanePredstaveniVnoreny, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanelPredstaveniHlavniLayout.setVerticalGroup(
             jPanelPredstaveniHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,7 +600,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 .addComponent(jButtonPredstaveniVyberData)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPanePredstaveniVnoreny, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneSpolecny.addTab("Predstaveni", jPanelPredstaveniHlavni);
@@ -607,11 +611,11 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         jPanelFilmHlavni.setLayout(jPanelFilmHlavniLayout);
         jPanelFilmHlavniLayout.setHorizontalGroup(
             jPanelFilmHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1445, Short.MAX_VALUE)
+            .addGap(0, 1101, Short.MAX_VALUE)
         );
         jPanelFilmHlavniLayout.setVerticalGroup(
             jPanelFilmHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 834, Short.MAX_VALUE)
+            .addGap(0, 804, Short.MAX_VALUE)
         );
 
         jTabbedPaneSpolecny.addTab("Film", jPanelFilmHlavni);
@@ -622,11 +626,11 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         jPanelKinoHlavni.setLayout(jPanelKinoHlavniLayout);
         jPanelKinoHlavniLayout.setHorizontalGroup(
             jPanelKinoHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1445, Short.MAX_VALUE)
+            .addGap(0, 1101, Short.MAX_VALUE)
         );
         jPanelKinoHlavniLayout.setVerticalGroup(
             jPanelKinoHlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 834, Short.MAX_VALUE)
+            .addGap(0, 804, Short.MAX_VALUE)
         );
 
         jTabbedPaneSpolecny.addTab("Kino", jPanelKinoHlavni);
@@ -636,26 +640,16 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jButtonPredstaveniVyberDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyberDataActionPerformed
         int row = jTablePredstaveniDatafromDTB.getSelectedRow();
         int column = jTablePredstaveniDatafromDTB.getSelectedColumn();
         switch (column) {
 
             case 0:
-
-                switchcase_reference_number = 0;
-                String sql0_dotaz = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idPredstaveni="
-                        + "\"" + jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column) + "\"" + ";";
-
-                /* String sql0_dist_dotaz = "select distinct idFilm from film;";
-                DataFromDatabase dfd = new DataFromDatabase();
-                Vector<Vector<Object>> idfilmu = new Vector<Vector<Object>>();
-                idfilmu = dfd.getDataFromSQLDatabase(sql0_dist_dotaz);
-                int[] idhodnoty = new int[idfilmu.size()];
-                for (int i = 0; i < idfilmu.size(); i++) {
-                    idhodnoty[i] = Integer.parseInt(idfilmu.elementAt(i).elementAt(0).toString());
-                    
-                }*/
+                switch_casenumber_predstaveni = 0;
+                String sql0_dotaz = PrepareStatement.selectDatabySelectedValue(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
+                                               
                 jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(sql0_dotaz, 1) {
                     @Override //nastavení editovatelnosti data přepsaním typu na string
                     public Class getColumnClass(int column) {
@@ -685,20 +679,22 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
             case 1:
 
-                switchcase_reference_number = 1;
-                String sql1_dotaz = "select film.idFilm, JmenoF, Reziser, Rok, Popis from film inner join predstaveni on predstaveni.idFilm=film.idFilm where predstaveni.Datum="
+                switch_casenumber_predstaveni = 1;
+                String sql1_dotaz = PrepareStatement.selectDatabySelectedValueUsingOneInnerJoin(namesofcolumns_filmtable, namesofDTBtables[1], namesofDTBtables[0],
+                        namesofcolumns_filmtable[0], namesofcolumns_predstavenitable[2], namesofcolumns_predstavenitable[1], jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
+               /* String sql1_dotaz = "select film.idFilm, JmenoF, Reziser, Rok, Popis from film inner join predstaveni on predstaveni.idFilm=film.idFilm where predstaveni.Datum="
                         + "\"" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column).toString()) + "\"" + ";";
+                System.out.println(sql1_dotaz);*/
                 performed_querry_predstaveni_film_by_date = sql1_dotaz;
                 jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(sql1_dotaz, 1));
                 JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER);
-                // String[] datum1 = datum.split(" ")[0].split("\\-");
                 String datum = jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column).toString();
                 jLabelPredstaveniPopisAktualizace.setText(datum + " hrají tyto filmy:");
                 break;
 
             case 2:
 
-                switchcase_reference_number = 2;
+                switch_casenumber_predstaveni = 2;
                 String sql2_dotaz = "select predstaveni.idPredstaveni, film.JmenoF, predstaveni.idFilm from film inner join predstaveni on predstaveni.idFilm=film.idFilm where predstaveni.idFilm ="
                         + "\"" + jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column) + "\"" + ";";
                 jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(sql2_dotaz, 1) {
@@ -706,8 +702,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return !(columnIndex == 0 || columnIndex == 1);
                     }
-                });
-               JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER);
+                });                
+                HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
                 jLabelPredstaveniPopisAktualizace.setText("V této tabulce můžete u představení změnit idFilmu.");
             default:
                 break;
@@ -730,37 +726,48 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
 
     private void jButtonPredstaveniAktualizujVDTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniAktualizujVDTBActionPerformed
-        edited_fields1 = ((UpravaDatTableModel) jTablePredstaveniZobrazenivybranychDat.getModel()).getIndicesOfEditedFields();
+        edited_fields_predstaveni_tab = ((UpravaDatTableModel) jTablePredstaveniZobrazenivybranychDat.getModel()).getIndicesOfEditedFields();
 
-        switch (switchcase_reference_number) {
+        switch (switch_casenumber_predstaveni) {
 
             case 0:
-                for (int i = 0; i < edited_fields1.size(); i++) {
-                    String sql_dotaz = "UPDATE predstaveni SET Datum =" + "\"" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), edited_fields1.get(i).get(1)).toString()) + "\"" + "WHERE idPredstaveni=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), 0) + "\"" + ";";
+                for (int i = 0; i < edited_fields_predstaveni_tab.size(); i++) {
+                    
+                    String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[1],
+                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
+                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_predstavenitable[0],
+                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+                    
                     executeStatement(sql_dotaz);
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
-                //.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
                 break;
 
             case 1:
-                for (int i = 0; i < edited_fields1.size(); i++) {
-                    String columnname = jTablePredstaveniZobrazenivybranychDat.getModel().getColumnName(edited_fields1.get(i).get(1));
-                    String sql_dotaz = "UPDATE film SET " + columnname + "=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), edited_fields1.get(i).get(1)) + "\" " + "WHERE film.idFilm=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), 0) + "\"" + ";";
-                    System.out.println(sql_dotaz);
+                for (int i = 0; i < edited_fields_predstaveni_tab.size(); i++) {
+                    String columnname = jTablePredstaveniZobrazenivybranychDat.getModel().getColumnName(edited_fields_predstaveni_tab.get(i).get(1));
+                    
+                    String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], columnname,
+                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
+                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_filmtable[0],
+                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+                    
                     executeStatement(sql_dotaz);
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
-               // JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
                 break;
 
             case 2:
-                for (int i = 0; i < edited_fields1.size(); i++) {
-                    String sql_dotaz = "UPDATE predstaveni SET predstaveni.idFilm =" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), edited_fields1.get(i).get(1)) + "\"" + "WHERE idPredstaveni=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields1.get(i).get(0), 0) + "\"" + ";";
-                    executeStatement(sql_dotaz);
+                for (int i = 0; i < edited_fields_predstaveni_tab.size(); i++) {
+                    
+                    String sql_dotaz_test = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[2], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_predstavenitable[2], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+                    
+                    String sql_dotaz = "UPDATE predstaveni SET predstaveni.idFilm =" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)) + "\"" + "WHERE idPredstaveni=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0) + "\"" + ";";
+                    System.out.println(sql_dotaz_test);
+                    executeStatement(sql_dotaz_test);
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
-              //  JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
+                //  JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
                 break;
 
             default:
@@ -769,121 +776,117 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonPredstaveniAktualizujVDTBActionPerformed
     private ArrayList<Integer> getDistinctIndicesOfEditedRows() {
-        edited_rows1 = ((PridavaniDatTableModel) jTablePredstaveniPridaniDat.getModel()).getIndicesOfEditedRows();
-        ArrayList<Integer> distinctIndices = new ArrayList<Integer>(new HashSet<>(edited_rows1));
+        edited_rows_predstaveni_tab = ((PridavaniDatTableModel) jTablePredstaveniPridaniDat.getModel()).getIndicesOfEditedRows();
+        ArrayList<Integer> distinctIndices = new ArrayList<Integer>(new HashSet<>(edited_rows_predstaveni_tab));
         return distinctIndices;
     }
-
+    
     private void jButtonPredstaveniPridatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniPridatDataActionPerformed
-        edited_rows1 = getDistinctIndicesOfEditedRows();
-        for (int i = 0; i < edited_rows1.size(); i++) {
+        edited_rows_predstaveni_tab = getDistinctIndicesOfEditedRows();
+        for (int i = 0; i < edited_rows_predstaveni_tab.size(); i++) {
 
-            String sql_dotaz = "INSERT INTO predstaveni (Datum, idFilm) values ('" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows1.get(i), 1).toString())
-                    + "', " + "'" + jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows1.get(i), 2) + "');";
+            String sql_dotaz = "INSERT INTO predstaveni (Datum, idFilm) values ('" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows_predstaveni_tab.get(i), 1).toString())
+                    + "', " + "'" + jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows_predstaveni_tab.get(i), 2) + "');";
             executeStatement(sql_dotaz);
 
             HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
             //.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
-            jTablePredstaveniPridaniDat.setModel(new PridavaniDatTableModel());
+            
         }
+        jTablePredstaveniPridaniDat.setModel(new PridavaniDatTableModel());
     }//GEN-LAST:event_jButtonPredstaveniPridatDataActionPerformed
 
+    
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqlidPredstaveni_equals = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idPredstaveni = "
-                + jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue() + ";";
+        String sqlidPredstaveni_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "=", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
+        
         System.out.println(sqlidPredstaveni_equals);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidPredstaveni_equals);
-      //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_equals, 1));
-      //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_equals, 1));
+        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqlidPredstaveni_equals;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed
 
     private void jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqldate_equals = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where Datum = "
-                + "\"" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTextFieldPredstaveniVyhledavaniDatum.getText()) + "\"" + ";";
+         String sqldate_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "=", jTextFieldPredstaveniVyhledavaniDatum.getText());
+        
         System.out.println(sqldate_equals);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqldate_equals);
-      //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_equals, 1));
-      //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_equals, 1));
+        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqldate_equals;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed
 
     private void jButtonPredstaveniVyhledavaniDatumJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqldate_more = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where Datum > "
-                + "\"" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTextFieldPredstaveniVyhledavaniDatum.getText()) + "\"" + ";";
+        String sqldate_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], ">", jTextFieldPredstaveniVyhledavaniDatum.getText());
         System.out.println(sqldate_more);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqldate_more);
-      //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_more, 1));
-      // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_more, 1));
+        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqldate_more;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniDatumJeVetsiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniDatumJeMensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeMensiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqldate_less = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where Datum < "
-                + "\"" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTextFieldPredstaveniVyhledavaniDatum.getText()) + "\"" + ";";
+        String sqldate_less = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "<", jTextFieldPredstaveniVyhledavaniDatum.getText());
         System.out.println(sqldate_less);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqldate_less);
-      //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_less, 1));
-      //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_less, 1));
+        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqldate_less;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniDatumJeMensiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqlidPredstaveni_more = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idPredstaveni > "
-                + jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue() + ";";
+        String sqlidPredstaveni_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], ">", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
         System.out.println(sqlidPredstaveni_more);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidPredstaveni_more);
-       // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_more, 1));
-       // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_more, 1));
+        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqlidPredstaveni_more;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeVetsiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeMensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeMensiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqlidPredstaveni_less = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idPredstaveni < "
-                + jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue() + ";";
+        String sqlidPredstaveni_less = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "<", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
         System.out.println(sqlidPredstaveni_less);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidPredstaveni_less);
-      //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_less, 1));
-      //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_less, 1));
+        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqlidPredstaveni_less;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeMensiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqlidFilm_more = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idFilm > "
-                + jSpinnerPredstaveniVyhledavaniidFilm.getValue() + ";";
+        String sqlidFilm_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], ">", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
+               
         System.out.println(sqlidFilm_more);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidFilm_more);
-       // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_more, 1));
-       // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_more, 1));
+        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqlidFilm_more;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidFilmuJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmuJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqlidFilm_equals = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idFilm = "
-                + jSpinnerPredstaveniVyhledavaniidFilm.getValue() + ";";
+        String sqlidFilm_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "=", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
         System.out.println(sqlidFilm_equals);
-         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidFilm_equals);
-       // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_equals, 1));
-      //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidFilm_equals);
+        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_equals, 1));
+        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqlidFilm_equals;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidFilmuJeRovnoActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidFilmJeMensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmJeMensiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-        String sqlidFilm_less = "select predstaveni.idPredstaveni, Datum, predstaveni.idFilm from predstaveni where idFilm < "
-                + jSpinnerPredstaveniVyhledavaniidFilm.getValue() + ";";
+        String sqlidFilm_less = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "<", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
         System.out.println(sqlidFilm_less);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidFilm_less);
-       // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_less, 1));
-      // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
+        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_less, 1));
+        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = sqlidFilm_less;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidFilmJeMensiActionPerformed
 
@@ -891,11 +894,14 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         HelperMethods.clearTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, SQLDOTAZ_PREDSTAVENI);
     }//GEN-LAST:event_jButtonPredstaveniVyhledavavniOdstranitVysledkyActionPerformed
 
+   
     private void jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed
         int[] row = jTablePredstaveniVysledkyVyhledavani.getSelectedRows();
         for (int i = 0; i < row.length; i++) {
-            String sqldotaz_delete = "DELETE FROM predstaveni WHERE idPredstaveni=" + jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0) + ";";
-            executeStatement(sqldotaz_delete);
+           String sqldotaz_delete = PrepareStatement.DeleteSelectedRows(namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0));
+         //   String sqldotaz_delete = "DELETE FROM predstaveni WHERE idPredstaveni=" + jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0) + ";";
+         System.out.println(sqldotaz_delete);  
+         executeStatement(sqldotaz_delete);
         }
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, performed_querry_predstaveni_vyhledavani);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
@@ -903,29 +909,30 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed
 
     private void jButtonPredstaveniUpravitPopisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniUpravitPopisActionPerformed
-if(jTablePredstaveniZobrazenivybranychDat.getSelectedColumn()== jTablePredstaveniZobrazenivybranychDat.getColumnCount()-1) {
-predstaveni_popis_filmu_selectedrow_index =jTablePredstaveniZobrazenivybranychDat.getSelectedRow(); 
-predstaveni_popis_filmu_selectedcolumn_index=jTablePredstaveniZobrazenivybranychDat.getSelectedColumn();
-jTextAreaPredstaveniUpravaPopisuFilmu.setText(jTablePredstaveniZobrazenivybranychDat.getValueAt(jTablePredstaveniZobrazenivybranychDat.getSelectedRow(),
-jTablePredstaveniZobrazenivybranychDat.getSelectedColumn()).toString());}
+        if (jTablePredstaveniZobrazenivybranychDat.getSelectedColumn() == jTablePredstaveniZobrazenivybranychDat.getColumnCount() - 1) {
+            predstaveni_popis_filmu_selectedrow_index = jTablePredstaveniZobrazenivybranychDat.getSelectedRow();
+            predstaveni_popis_filmu_selectedcolumn_index = jTablePredstaveniZobrazenivybranychDat.getSelectedColumn();
+            jTextAreaPredstaveniUpravaPopisuFilmu.setText(jTablePredstaveniZobrazenivybranychDat.getValueAt(jTablePredstaveniZobrazenivybranychDat.getSelectedRow(),
+                    jTablePredstaveniZobrazenivybranychDat.getSelectedColumn()).toString());
+        }
     }//GEN-LAST:event_jButtonPredstaveniUpravitPopisActionPerformed
 
     private void jButtonPredstaveniPopisFilmuDoTabulkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniPopisFilmuDoTabulkyActionPerformed
-     jTablePredstaveniZobrazenivybranychDat.setValueAt(jTextAreaPredstaveniUpravaPopisuFilmu.getText(), predstaveni_popis_filmu_selectedrow_index,
-     predstaveni_popis_filmu_selectedcolumn_index);
-     jTablePredstaveniZobrazenivybranychDat.repaint(50);
-     //System.out.println(jTextAreaPredstaveniUpravaPopisuFilmu.getText());
-     //System.out.println(predstaveni_popis_filmu_selectedrow_index);
-    // System.out.println(predstaveni_popis_filmu_selectedcolumn_index);
+        jTablePredstaveniZobrazenivybranychDat.setValueAt(jTextAreaPredstaveniUpravaPopisuFilmu.getText(), predstaveni_popis_filmu_selectedrow_index,
+                predstaveni_popis_filmu_selectedcolumn_index);
+        jTablePredstaveniZobrazenivybranychDat.repaint(50);
+        //System.out.println(jTextAreaPredstaveniUpravaPopisuFilmu.getText());
+        //System.out.println(predstaveni_popis_filmu_selectedrow_index);
+        // System.out.println(predstaveni_popis_filmu_selectedcolumn_index);
     }//GEN-LAST:event_jButtonPredstaveniPopisFilmuDoTabulkyActionPerformed
 
     private void jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed
-     String columnname = jTablePredstaveniZobrazenivybranychDat.getColumnName(predstaveni_popis_filmu_selectedcolumn_index);
+        String columnname = jTablePredstaveniZobrazenivybranychDat.getColumnName(predstaveni_popis_filmu_selectedcolumn_index);
         String sql_dotaz = "UPDATE film SET " + columnname + "=" + "\"" + jTextAreaPredstaveniUpravaPopisuFilmu.getText() + "\" " + "WHERE film.idFilm=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0) + "\"" + ";";
         executeStatement(sql_dotaz);
-     jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(performed_querry_predstaveni_film_by_date, 1));
-                JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER); 
-                HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
+        jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(performed_querry_predstaveni_film_by_date, 1));
+        JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER);
+        HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
     }//GEN-LAST:event_jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed
 
     /**

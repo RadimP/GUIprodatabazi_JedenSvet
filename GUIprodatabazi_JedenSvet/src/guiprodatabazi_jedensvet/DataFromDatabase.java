@@ -185,7 +185,7 @@ public class DataFromDatabase {
 
                 for (int i = 1; i <= columns; i++) {
                     if(i!=2)
-                    {row.addElement(rs.getObject(i));} else {row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechDateFormat(rs.getObject(i).toString()));}
+                    {row.addElement(rs.getObject(i));} else {row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(rs.getObject(i).toString()));}
                 }
 
                 data.addElement(row);

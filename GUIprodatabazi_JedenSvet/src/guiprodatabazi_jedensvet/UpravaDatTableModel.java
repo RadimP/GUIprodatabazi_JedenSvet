@@ -21,23 +21,28 @@ public class UpravaDatTableModel extends AbstractTableModel {
     ArrayList<ArrayList<Integer>> edited_fields = new ArrayList<ArrayList<Integer>>();
 
     UpravaDatTableModel() {
+       
         String empty = "";
         col = new Vector<Object>();
         data = new Vector<Vector<Object>>();
+        
         for (int i = 0; i < 4; i++) {
             col.addElement(empty);
         }
         for (int i = 0; i < 1; i++) {
             data.addElement(col);
         }
+        
     }
 
     UpravaDatTableModel(String sqldotaz) {
+        
         col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
         data = datafromdtb.getDataFromSQLDatabase(sqldotaz);
     }
 
     UpravaDatTableModel(String sqldotaz, int conversion) {
+        
         col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
         data = datafromdtb.getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(sqldotaz);
     }

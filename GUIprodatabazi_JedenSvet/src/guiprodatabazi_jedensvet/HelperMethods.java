@@ -5,6 +5,7 @@
  */
 package guiprodatabazi_jedensvet;
 
+import java.util.Arrays;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -55,7 +56,7 @@ public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.sw
         return number;
     }
 
-    public static String convertDateStringWithMinusSignToStandardCzechDateFormat(String date) {
+    public static String convertDateStringWithMinusSignToStandardCzechFormat(String date) {
         String date_splitted[] = date.split("[\\p{Punct}&&[^.]]"); //pro případ překlepů ošetřeno dělení libovolným intepunkčním znakem kromě tečky, 
         //i když tato data se bnačítají z databáze, tak se v nich překlepy neměly vyskytovat
         if (date_splitted.length == 3 && date_splitted[0].length()>2) { //druhá podmínka je zde proto, aby nebylo děleno datum, které bude zadáno již v cílovém formátu
@@ -71,5 +72,8 @@ public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.sw
         }
         return number;
     }
-
+ public static String normalizeArrayOfColumnNamesForSQLQuerry(String[] namesofcolumns, String nameofDTBtable) {
+  return Arrays.toString(namesofcolumns).replace("[", nameofDTBtable +".").replace("]", "").replaceAll(", ", ", " +nameofDTBtable +".");
+ 
+ }
 }

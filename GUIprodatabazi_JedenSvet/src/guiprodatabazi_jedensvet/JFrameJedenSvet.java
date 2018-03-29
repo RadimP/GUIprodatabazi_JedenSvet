@@ -76,8 +76,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         tablemodel_predstaveni_results = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, 1);
         tablemodel_film_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_FILM, 1);
         initComponents();
-      jTablePredstaveniZobrazenivybranychDat.setModel(emptytable_predstaveni);
-      HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmDataFromDTB);
+        jTablePredstaveniZobrazenivybranychDat.setModel(emptytable_predstaveni);
+        HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmDataFromDTB);
         // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
         // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniPridaniDat);
         //  HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniVysledkyVyhledavani);
@@ -777,7 +777,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
             case 0:
                 switch_casenumber_predstaveni = 0;
                 String sql0_dotaz = PrepareStatement.selectDatabySelectedValue(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
-                                               
+
                 jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(sql0_dotaz, 1) {
                     @Override //nastavení editovatelnosti data přepsaním typu na string
                     public Class getColumnClass(int column) {
@@ -808,11 +808,10 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
             case 1:
 
                 switch_casenumber_predstaveni = 1;
-                String sql1_dotaz = PrepareStatement.selectDatabySelectedValueUsingOneInnerJoin(namesofcolumns_filmtable, namesofDTBtables[1], namesofDTBtables[0],
-                        namesofcolumns_filmtable[0], namesofcolumns_predstavenitable[2], namesofcolumns_predstavenitable[1], jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
-               /* String sql1_dotaz = "select film.idFilm, JmenoF, Reziser, Rok, Popis from film inner join predstaveni on predstaveni.idFilm=film.idFilm where predstaveni.Datum="
-                        + "\"" + HelperMethods.convertDateStringWithPointsToDatabaseFormat(jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column).toString()) + "\"" + ";";
-                System.out.println(sql1_dotaz);*/
+                String sql1_dotaz = PrepareStatement.selectDatabySelectedValueUsingOneInnerJoin(namesofcolumns_filmtable, namesofDTBtables[1],
+                        namesofDTBtables[0], namesofcolumns_filmtable[0], namesofcolumns_predstavenitable[2], namesofcolumns_predstavenitable[1],
+                        jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
+
                 performed_querry_predstaveni_film_by_date = sql1_dotaz;
                 jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(sql1_dotaz, 1));
                 JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER);
@@ -830,7 +829,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return !(columnIndex == 0 || columnIndex == 1);
                     }
-                });                
+                });
                 HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
                 jLabelPredstaveniPopisAktualizace.setText("V této tabulce můžete u představení změnit idFilmu.");
             default:
@@ -860,12 +859,12 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
             case 0:
                 for (int i = 0; i < edited_fields_predstaveni_tab.size(); i++) {
-                    
+
                     String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[1],
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
-                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_predstavenitable[0],
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
-                    
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
+                                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_predstavenitable[0],
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+
                     executeStatement(sql_dotaz);
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
@@ -874,12 +873,12 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
             case 1:
                 for (int i = 0; i < edited_fields_predstaveni_tab.size(); i++) {
                     String columnname = jTablePredstaveniZobrazenivybranychDat.getModel().getColumnName(edited_fields_predstaveni_tab.get(i).get(1));
-                    
+
                     String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], columnname,
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
-                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
-                    
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
+                                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_filmtable[0],
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+
                     executeStatement(sql_dotaz);
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
@@ -887,12 +886,14 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
             case 2:
                 for (int i = 0; i < edited_fields_predstaveni_tab.size(); i++) {
-                    
-                    String sql_dotaz_test = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[2], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_predstavenitable[2], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
-                    
-                    String sql_dotaz = "UPDATE predstaveni SET predstaveni.idFilm =" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)) + "\"" + "WHERE idPredstaveni=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0) + "\"" + ";";
-                    System.out.println(sql_dotaz_test);
-                    executeStatement(sql_dotaz_test);
+
+                    String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[2],
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)),
+                            namesofcolumns_predstavenitable[2], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+
+                    // String sql_dotaz = "UPDATE predstaveni SET predstaveni.idFilm =" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)) + "\"" + "WHERE idPredstaveni=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0) + "\"" + ";";
+                    System.out.println(sql_dotaz);
+                    executeStatement(sql_dotaz);
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
                 //  JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
@@ -908,7 +909,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         ArrayList<Integer> distinctIndices = new ArrayList<Integer>(new HashSet<>(edited_rows_predstaveni_tab));
         return distinctIndices;
     }
-    
+
     private void jButtonPredstaveniPridatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniPridatDataActionPerformed
         edited_rows_predstaveni_tab = getDistinctIndicesOfEditedRows();
         for (int i = 0; i < edited_rows_predstaveni_tab.size(); i++) {
@@ -919,16 +920,16 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
             HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
             //.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
-            
+
         }
         jTablePredstaveniPridaniDat.setModel(new PridavaniDatTableModel());
     }//GEN-LAST:event_jButtonPredstaveniPridatDataActionPerformed
 
-    
+
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String sqlidPredstaveni_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "=", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        
+
         System.out.println(sqlidPredstaveni_equals);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidPredstaveni_equals);
         //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_equals, 1));
@@ -938,8 +939,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
     private void jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
-         String sqldate_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "=", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        
+        String sqldate_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "=", jTextFieldPredstaveniVyhledavaniDatum.getText());
+
         System.out.println(sqldate_equals);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqldate_equals);
         //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_equals, 1));
@@ -990,7 +991,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     private void jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String sqlidFilm_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], ">", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-               
+
         System.out.println(sqlidFilm_more);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, sqlidFilm_more);
         // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_more, 1));
@@ -1022,14 +1023,14 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         HelperMethods.clearTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, SQLDOTAZ_PREDSTAVENI);
     }//GEN-LAST:event_jButtonPredstaveniVyhledavavniOdstranitVysledkyActionPerformed
 
-   
+
     private void jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed
         int[] row = jTablePredstaveniVysledkyVyhledavani.getSelectedRows();
         for (int i = 0; i < row.length; i++) {
-           String sqldotaz_delete = PrepareStatement.DeleteSelectedRows(namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0));
-         //   String sqldotaz_delete = "DELETE FROM predstaveni WHERE idPredstaveni=" + jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0) + ";";
-         System.out.println(sqldotaz_delete);  
-         executeStatement(sqldotaz_delete);
+            String sqldotaz_delete = PrepareStatement.DeleteSelectedRows(namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0));
+            //   String sqldotaz_delete = "DELETE FROM predstaveni WHERE idPredstaveni=" + jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0) + ";";
+            System.out.println(sqldotaz_delete);
+            executeStatement(sqldotaz_delete);
         }
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, performed_querry_predstaveni_vyhledavani);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
@@ -1056,8 +1057,13 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
     private void jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed
         String columnname = jTablePredstaveniZobrazenivybranychDat.getColumnName(predstaveni_popis_filmu_selectedcolumn_index);
-        String sql_dotaz = "UPDATE film SET " + columnname + "=" + "\"" + jTextAreaPredstaveniUpravaPopisuFilmu.getText() + "\" " + "WHERE film.idFilm=" + "\"" + jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0) + "\"" + ";";
-        executeStatement(sql_dotaz);
+
+        String sql_dotaz_test = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], columnname,
+                jTextAreaPredstaveniUpravaPopisuFilmu.getText(), namesofcolumns_filmtable[0],
+                jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0));
+
+        executeStatement(sql_dotaz_test);
+
         jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(performed_querry_predstaveni_film_by_date, 1));
         JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER);
         HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);

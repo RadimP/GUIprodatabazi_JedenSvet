@@ -39,6 +39,7 @@ public class UpravaDatTableModel extends AbstractTableModel {
         
         col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
         data = datafromdtb.getDataFromSQLDatabase(sqldotaz);
+        
     }
 
     UpravaDatTableModel(String sqldotaz, int conversion) {
@@ -62,7 +63,7 @@ public class UpravaDatTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int i, int i1) {
-        return data.get(i).get(i1);
+                return data.get(i).get(i1);
     }
 
     @Override

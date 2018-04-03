@@ -5,7 +5,6 @@
  */
 package guiprodatabazi_jedensvet;
 
-import static guiprodatabazi_jedensvet.JFrameJedenSvet.properties;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
+import static guiprodatabazi_jedensvet.JFrameJedenSvet.PROPERTIES;
+import java.sql.SQLException;
 
 /**
  *
@@ -22,36 +23,23 @@ import java.util.Vector;
  */
 public class DataFromDatabase {
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/jeden_svet";
     Vector<Object> columnNames = new Vector<Object>();
     Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-    
-     Properties properties = new Properties();
+
+    Properties properties = new Properties();
 
     public DataFromDatabase() {
-        
-        properties.setProperty("user", "root");
-        properties.setProperty("password", "1111");
-        properties.setProperty("useSSL", "false");
-        properties.setProperty("autoReconnect", "true");
+
     }
 
     public Vector<Vector<Object>> getDataFromSQLDatabase(String sqldotaz) {
-
-        try {
-            //  Connect to an Access Database           
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(DB_URL, properties);
-
-            //  Read data from a table
-            String sql = sqldotaz;
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        String sql = sqldotaz;
+        try (Connection connection = HelperMethods.getDBConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
-
-            //  Get row data
+           
             while (rs.next()) {
                 Vector<Object> row = new Vector<Object>(columns);
 
@@ -64,7 +52,7 @@ public class DataFromDatabase {
 
             rs.close();
             stmt.close();
-            connection.close();
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -73,27 +61,23 @@ public class DataFromDatabase {
 
     public String[] getColumnNamesFromSQLDatabaseAsArray(String sqldotaz) {
         String[] columnNamesArray = null;
-        try {
-            //  Connect to an Access Database           
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(DB_URL, properties);
+        String sql = sqldotaz;
 
-            //  Read data from a table
-            String sql = sqldotaz;
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        try (Connection connection = HelperMethods.getDBConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
             columnNamesArray = new String[columns];
             //  Get column names
             for (int i = 1; i <= columns; i++) {
 
-                columnNamesArray[i - 1] = md.getColumnName(i).toString();
+                columnNamesArray[i - 1] = md.getColumnName(i);
             }
 
             rs.close();
             stmt.close();
-            connection.close();
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -102,15 +86,12 @@ public class DataFromDatabase {
     }
 
     public Vector<Object> getColumnNamesFromSQLDatabase(String sqldotaz) {
-        try {
-            //  Connect to an Access Database           
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(DB_URL, properties);
 
-            //  Read data from a table
-            String sql = sqldotaz;
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        String sql = sqldotaz;
+        try (Connection connection = HelperMethods.getDBConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
 
@@ -123,8 +104,7 @@ public class DataFromDatabase {
 
             rs.close();
             stmt.close();
-            connection.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return columnNames;
@@ -133,15 +113,13 @@ public class DataFromDatabase {
 
     public Object[][] get4RowEmptyArray(String sqldotaz) {
         Object[][] emptydata = null;
-        try {
-            //  Connect to an Access Database           
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(DB_URL, properties);
 
-            //  Read data from a table
-            String sql = sqldotaz;
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+        String sql = sqldotaz;
+
+        try (Connection connection = HelperMethods.getDBConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
             emptydata = new Object[4][columns];
@@ -159,23 +137,20 @@ public class DataFromDatabase {
 
             rs.close();
             stmt.close();
-            connection.close();
+
         } catch (Exception e) {
             System.out.println(e);
         }
         return emptydata;
     }
+
     public Vector<Vector<Object>> getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(String sqldotaz) {
+        String sql = sqldotaz;
 
-        try {
-            //  Connect to an Access Database           
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(DB_URL, properties);
+        try (Connection connection = HelperMethods.getDBConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);) {
 
-            //  Read data from a table
-            String sql = sqldotaz;
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
             ResultSetMetaData md = rs.getMetaData();
             int columns = md.getColumnCount();
 
@@ -184,8 +159,11 @@ public class DataFromDatabase {
                 Vector<Object> row = new Vector<Object>(columns);
 
                 for (int i = 1; i <= columns; i++) {
-                    if(i!=2)
-                    {row.addElement(rs.getObject(i));} else {row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(rs.getObject(i).toString()));}
+                    if (i != 2) {
+                        row.addElement(rs.getObject(i));
+                    } else {
+                        row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(rs.getObject(i).toString()));
+                    }
                 }
 
                 data.addElement(row);
@@ -193,7 +171,6 @@ public class DataFromDatabase {
 
             rs.close();
             stmt.close();
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }

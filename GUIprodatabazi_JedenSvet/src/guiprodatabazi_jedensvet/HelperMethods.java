@@ -5,9 +5,7 @@
  */
 package guiprodatabazi_jedensvet;
 
-import static guiprodatabazi_jedensvet.PrepareStatement.DB_URL;
-import static guiprodatabazi_jedensvet.PrepareStatement.JDBC_DRIVER;
-import static guiprodatabazi_jedensvet.PrepareStatement.PROPERTIES;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,72 +19,60 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author RadimP
  */
 public class HelperMethods {
- static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/jeden_svet";
-    static final Properties PROPERTIES = new Properties();   
 
-public static Connection getDBConnection() {
-    PROPERTIES.setProperty("user", "root");
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost/jeden_svet";
+    static final Properties PROPERTIES = new Properties();
+
+    public static Connection getDBConnection() {
+        PROPERTIES.setProperty("user", "root");
         PROPERTIES.setProperty("password", "1111");
         PROPERTIES.setProperty("useSSL", "false");
         PROPERTIES.setProperty("autoReconnect", "true");
 
-		Connection dbConnection = null;
+        Connection dbConnection = null;
 
-		try {
+        try {
+            Class.forName(JDBC_DRIVER);
 
-			Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            dbConnection = DriverManager.getConnection(
+                    DB_URL, PROPERTIES);
+            return dbConnection;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return dbConnection;
+    }
 
-		} catch (ClassNotFoundException e) {
+    public static void clearTableWithVyhledavaniDatTableModel(javax.swing.JTable table, String sqldotaz) {
+        table.setModel(new VyhledavaniDatTableModel(sqldotaz, ""));
+       setTableCellsAndHeaderCenterHorizontalAlignment(table);                
+    }
 
-			System.out.println(e.getMessage());
+    public static void updateTableWithVyhledavaniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
+        table.setModel(new VyhledavaniDatTableModel(sql_dotaz, 1));
+       setTableCellsAndHeaderCenterHorizontalAlignment(table);          
+    }
 
-		}
-
-		try {
-
-			dbConnection = DriverManager.getConnection(
-                             DB_URL, PROPERTIES);
-			return dbConnection;
-
-		} catch (SQLException e) {
-
-			System.out.println(e.getMessage());
-
-		}
-
-		return dbConnection;
-
-	}    
-    
-public static void clearTableWithVyhledavaniDatTableModel(javax.swing.JTable table, String sqldotaz) {
-    table.setModel(new  VyhledavaniDatTableModel(sqldotaz, ""));
-    } 
-
-public static void updateTableWithVyhledavaniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
-table.setModel(new VyhledavaniDatTableModel(sql_dotaz, 1));
+    public static void setTableCellsAndHeaderCenterHorizontalAlignment(javax.swing.JTable table) {
         JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER);
-      /*  ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer())
-                .setHorizontalAlignment(SwingConstants.CENTER);*/
-}
-    
-public static void setTableCellsAndHeaderCenterHorizontalAlignment(javax.swing.JTable table) {
-        JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER);
-        ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer())
+       ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer())
                 .setHorizontalAlignment(SwingConstants.CENTER);
-    }     
-    
-public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
+    }
+
+    public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
         table.setModel(new ZobrazeniDatTableModel(sql_dotaz, 1));
-        JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER);
-      /*  ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer())
-                .setHorizontalAlignment(SwingConstants.CENTER);*/
+        setTableCellsAndHeaderCenterHorizontalAlignment(table);
 
     }
-    
-    public static String convertDateStringWithPointsToDatabaseFormat(String date) { 
+
+    public static String convertDateStringWithPointsToDatabaseFormat(String date) {
         String date_splitted[] = date.split("[\\p{Punct}]"); //pro případ překlepů ošetřeno dělení libovolným intepunkčním znakem
-        if (date_splitted.length == 3 && date_splitted[0].length()!=4) { //druhá podmínka je zde proto, aby nebylo děleno datum, které bude zadáno již v cílovém formátu
+        if (date_splitted.length == 3 && date_splitted[0].length() != 4) { //druhá podmínka je zde proto, aby nebylo děleno datum, které bude zadáno již v cílovém formátu
             date = date_splitted[2] + "-" + setTwoDigitsLongDayOrMonthNumber(date_splitted[1]) + "-" + setTwoDigitsLongDayOrMonthNumber(date_splitted[0]);
         }
         // System.out.println(date_splitted[2]+dash+setTwoDigitsLongDayOrMonthNumber(date_splitted[1]) +dash +setTwoDigitsLongDayOrMonthNumber(date_splitted[0]));
@@ -103,7 +89,7 @@ public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.sw
     public static String convertDateStringWithMinusSignToStandardCzechFormat(String date) {
         String date_splitted[] = date.split("[\\p{Punct}&&[^.]]"); //pro případ překlepů ošetřeno dělení libovolným intepunkčním znakem kromě tečky, 
         //i když tato data se bnačítají z databáze, tak se v nich překlepy neměly vyskytovat
-        if (date_splitted.length == 3 && date_splitted[0].length()>2) { //druhá podmínka je zde proto, aby nebylo děleno datum, které bude zadáno již v cílovém formátu
+        if (date_splitted.length == 3 && date_splitted[0].length() > 2) { //druhá podmínka je zde proto, aby nebylo děleno datum, které bude zadáno již v cílovém formátu
             date = removeFirstZeroFromDigitsOfDayOrMonthNumber(date_splitted[2]) + "." + removeFirstZeroFromDigitsOfDayOrMonthNumber(date_splitted[1]) + "." + date_splitted[0];
         }
         // System.out.println(date_splitted[2]+dash+setTwoDigitsLongDayOrMonthNumber(date_splitted[1]) +dash +setTwoDigitsLongDayOrMonthNumber(date_splitted[0]));
@@ -116,8 +102,9 @@ public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.sw
         }
         return number;
     }
- public static String normalizeArrayOfColumnNamesForSQLQuerry(String[] namesofcolumns, String nameofDTBtable) {
-  return Arrays.toString(namesofcolumns).replace("[", nameofDTBtable +".").replace("]", "").replaceAll(", ", ", " +nameofDTBtable +".");
- 
- }
+
+    public static String normalizeArrayOfColumnNamesForSQLQuerry(String[] namesofcolumns, String nameofDTBtable) {
+        return Arrays.toString(namesofcolumns).replace("[", nameofDTBtable + ".").replace("]", "").replaceAll(", ", ", " + nameofDTBtable + ".");
+
+    }
 }

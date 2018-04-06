@@ -5,8 +5,7 @@
  */
 package guiprodatabazi_jedensvet;
 
-import static guiprodatabazi_jedensvet.JFrameJedenSvet.JDBC_DRIVER;
-import static guiprodatabazi_jedensvet.JFrameJedenSvet.PROPERTIES;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -107,7 +106,6 @@ public class PrepareStatement {
                 + nameofDTBtable_1 + " inner join " + nameofDTBtable_2 + " on " + nameofDTBtable_1 + "." + columnnameDTBtable_1 + " = "
                 + nameofDTBtable_2 + "." + columnnameDTBtable_2 + " where " + nameofDTBtable_2 + "." + conditioncolumnname + " = "
                 + "\"" + value + "\"" + ";";
-
         return sql1_dotaz;
     }*/
     public static String executeSelectDatabySelectedValueUsingOneInnerJoinThreeColumns (Object value) throws SQLException {
@@ -209,8 +207,41 @@ public class PrepareStatement {
         }
 
         return querry;         
+      
+    }
     
-    
+    public static String executeInsertNewItemIntoFilmTable(String JmenoF, String Reziser, String Rok, String Popis) throws SQLException {
+    PreparedStatement st = null;
+        Connection connection = null;
+        String querry = null;
+        String sql_dotaz = "INSERT INTO film (JmenoF, Reziser, Rok, Popis) values (?, ?, ?, ?);";
+        try {
+
+            connection = HelperMethods.getDBConnection();
+            st = connection.prepareStatement(sql_dotaz);
+            st.setObject(1, JmenoF);
+             st.setObject(2, Reziser);
+             st.setObject(3, Rok);
+             st.setObject(4, Popis);
+            querry = st.toString().split(": ")[1];
+            System.out.println(querry);
+            st.execute();
+            st.closeOnCompletion();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (connection != null) {
+                connection.close();
+            }
+        }
+
+        return querry;       
     }
 
     public static String updateEditedValueInDTB(String nameofDTBtable, String nameofupdatedcolumn, Object newvalue, String nameofconditioncolumn, Object valueofcondition) {

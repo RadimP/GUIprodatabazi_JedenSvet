@@ -19,14 +19,15 @@ public class PridavaniDatTableModel extends AbstractTableModel {
 
     DataFromDatabase datafromdtb = new DataFromDatabase();
     //String[] col = {"idPredstaveni", "Datum", "idFilm"};
-    String[] col = datafromdtb.getColumnNamesFromSQLDatabaseAsArray(JFrameJedenSvet.SQLDOTAZ_PREDSTAVENI);
+    String[] col; // = datafromdtb.getColumnNamesFromSQLDatabaseAsArray(JFrameJedenSvet.SQLDOTAZ_PREDSTAVENI);
 
-    Object[][] data = datafromdtb.get4RowEmptyArray(JFrameJedenSvet.SQLDOTAZ_PREDSTAVENI);
+    Object[][] data; // = datafromdtb.get4RowEmptyArray(JFrameJedenSvet.SQLDOTAZ_PREDSTAVENI);
 
     ArrayList<Integer> edited_rows = new ArrayList<Integer>();
 
-    PridavaniDatTableModel() {
-
+    PridavaniDatTableModel(String SQL_Dotaz) {
+col = datafromdtb.getColumnNamesFromSQLDatabaseAsArray(SQL_Dotaz);
+data = datafromdtb.get4RowEmptyArray(SQL_Dotaz);
     }
 
     public ArrayList<Integer> getIndicesOfEditedRows() {

@@ -55,12 +55,7 @@ public class PrepareStatement {
         return querry;
     }
 
-    public static String selectDatabySelectedValue(String[] namesofcolumnsDTBtable, String nameofDTBtable, String columnnameDTBtable, Object value) {
-        String sql0_dotaz = "select " + HelperMethods.normalizeArrayOfColumnNamesForSQLQuerry(namesofcolumnsDTBtable, nameofDTBtable) + " from " + nameofDTBtable + " where " + columnnameDTBtable + " = "
-                + "\"" + value + "\"" + ";";
-
-        return sql0_dotaz;
-    }
+    
 
     public static String executeSelectDatabySelectedValueUsingOneInnerJoin(String[] namesofcolumnsDTBtable_1, String nameofDTBtable_1, String nameofDTBtable_2, String columnnameDTBtable_1, String columnnameDTBtable_2, String conditioncolumnname, Object value) throws SQLException {
         PreparedStatement st = null;
@@ -69,7 +64,7 @@ public class PrepareStatement {
         if ("Datum".equals(conditioncolumnname)) {
             value = HelperMethods.convertDateStringWithPointsToDatabaseFormat(value.toString());
         }
-        String sql1_dotaz = "select " + HelperMethods.normalizeArrayOfColumnNamesForSQLQuerry(namesofcolumnsDTBtable_1, nameofDTBtable_1) + " from "
+        String sql1_dotaz = "select distinct " + HelperMethods.normalizeArrayOfColumnNamesForSQLQuerry(namesofcolumnsDTBtable_1, nameofDTBtable_1) + " from "
                 + nameofDTBtable_1 + " inner join " + nameofDTBtable_2 + " on " + nameofDTBtable_1 + "." + columnnameDTBtable_1 + " = "
                 + nameofDTBtable_2 + "." + columnnameDTBtable_2 + " where " + nameofDTBtable_2 + "." + conditioncolumnname + " = ?;";
         try {
@@ -77,8 +72,8 @@ public class PrepareStatement {
             connection = HelperMethods.getDBConnection();
             st = connection.prepareStatement(sql1_dotaz);
             st.setObject(1, value);
-            querry = st.toString().split(": ")[1];
-            System.out.println(querry);
+             querry = st.toString().split(": ")[1];
+             System.out.println(querry);
             st.execute();
             st.closeOnCompletion();
 
@@ -98,16 +93,6 @@ public class PrepareStatement {
         return querry;
     }
 
-   /* public static String selectDatabySelectedValueUsingOneInnerJoin(String[] namesofcolumnsDTBtable_1, String nameofDTBtable_1, String nameofDTBtable_2, String columnnameDTBtable_1, String columnnameDTBtable_2, String conditioncolumnname, Object value) {
-        if ("Datum".equals(conditioncolumnname)) {
-            value = HelperMethods.convertDateStringWithPointsToDatabaseFormat(value.toString());
-        }
-        String sql1_dotaz = "select " + HelperMethods.normalizeArrayOfColumnNamesForSQLQuerry(namesofcolumnsDTBtable_1, nameofDTBtable_1) + " from "
-                + nameofDTBtable_1 + " inner join " + nameofDTBtable_2 + " on " + nameofDTBtable_1 + "." + columnnameDTBtable_1 + " = "
-                + nameofDTBtable_2 + "." + columnnameDTBtable_2 + " where " + nameofDTBtable_2 + "." + conditioncolumnname + " = "
-                + "\"" + value + "\"" + ";";
-        return sql1_dotaz;
-    }*/
     public static String executeSelectDatabySelectedValueUsingOneInnerJoinThreeColumns (Object value) throws SQLException {
     PreparedStatement st = null;
         Connection connection = null;

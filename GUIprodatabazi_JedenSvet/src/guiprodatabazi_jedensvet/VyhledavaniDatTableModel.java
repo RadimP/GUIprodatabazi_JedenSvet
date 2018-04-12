@@ -35,11 +35,10 @@ VyhledavaniDatTableModel(String sqldotaz, String empty) {
      * @param sqldotaz setting, what shoudl be displayed in the table
      * @param conversion arbitrary int value which indicates, that displayed dates in the 2nd column should follow czech convetional format for dates (dd.MM.yy) 
      */
-    VyhledavaniDatTableModel(String sqldotaz, int conversion) {
+  /*  VyhledavaniDatTableModel(String sqldotaz, int conversion) {
     col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
-         data = datafromdtb.getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(sqldotaz);
-       
-    }
+         data = datafromdtb.getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(sqldotaz);       
+    }*/
 
     @Override
     public int getRowCount() {

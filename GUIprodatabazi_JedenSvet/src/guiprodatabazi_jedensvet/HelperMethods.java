@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -18,43 +20,39 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author RadimP
  */
+
 public class HelperMethods {
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/jeden_svet";
     static final Properties PROPERTIES = new Properties();
 
-    public static Connection getDBConnection() {
-        PROPERTIES.setProperty("user", "root");
-        PROPERTIES.setProperty("password", "1111");
-        PROPERTIES.setProperty("useSSL", "false");
-        PROPERTIES.setProperty("autoReconnect", "true");
-
-        Connection dbConnection = null;
-
+    public static Connection getDBConnection() {Connection dbConnection = null;
         try {
-            Class.forName(JDBC_DRIVER);
-
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
+            setPropertiesForConnection(PROPERTIES);                            
+            Class.forName(JDBC_DRIVER);           
             dbConnection = DriverManager.getConnection(
-                    DB_URL, PROPERTIES);
-            return dbConnection;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+                    DB_URL, PROPERTIES);           
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(HelperMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return dbConnection;
+return dbConnection;
     }
 
+    private static void setPropertiesForConnection(Properties properties) {
+        properties.setProperty("user", "root");
+    properties.setProperty("password", "1111");
+            properties.setProperty("useSSL", "false");
+            properties.setProperty("autoReconnect", "true");     
+    }
+    
     public static void clearTableWithVyhledavaniDatTableModel(javax.swing.JTable table, String sqldotaz) {
         table.setModel(new VyhledavaniDatTableModel(sqldotaz, ""));
        setTableCellsAndHeaderCenterHorizontalAlignment(table);                
     }
 
     public static void updateTableWithVyhledavaniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
-        table.setModel(new VyhledavaniDatTableModel(sql_dotaz, 1));
+        table.setModel(new VyhledavaniDatTableModel(sql_dotaz));
        setTableCellsAndHeaderCenterHorizontalAlignment(table);          
     }
 
@@ -65,10 +63,19 @@ public class HelperMethods {
     }
 
     public static void updateDisplayedDataInTableWithZobrazeniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
-        table.setModel(new ZobrazeniDatTableModel(sql_dotaz, 1));
+        table.setModel(new ZobrazeniDatTableModel(sql_dotaz));
         setTableCellsAndHeaderCenterHorizontalAlignment(table);
-
     }
+    
+    public static void updateDisplayedDataInTableWithUpravaDatTableModel(javax.swing.JTable table, String sql_dotaz) {
+        table.setModel(new UpravaDatTableModel(sql_dotaz));
+        setTableCellsAndHeaderCenterHorizontalAlignment(table);
+    } 
+    
+    public static void updateDisplayedDataInTableWithPridavaniDatTableModel(javax.swing.JTable table, String sql_dotaz) {
+        table.setModel(new PridavaniDatTableModel(sql_dotaz));
+        setTableCellsAndHeaderCenterHorizontalAlignment(table);
+    } 
 
     public static String convertDateStringWithPointsToDatabaseFormat(String date) {
         String date_splitted[] = date.split("[\\p{Punct}]"); //pro případ překlepů ošetřeno dělení libovolným intepunkčním znakem

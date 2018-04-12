@@ -42,11 +42,11 @@ public class UpravaDatTableModel extends AbstractTableModel {
         
     }
 
-    UpravaDatTableModel(String sqldotaz, int conversion) {
+  /*  UpravaDatTableModel(String sqldotaz, int conversion) {
         
         col = datafromdtb.getColumnNamesFromSQLDatabase(sqldotaz);
         data = datafromdtb.getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(sqldotaz);
-    }
+    }*/
     public ArrayList<ArrayList<Integer>> getIndicesOfEditedFields() {
         return edited_fields;
     }

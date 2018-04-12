@@ -83,16 +83,16 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         //   PROPERTIES.setProperty("useSSL", "false");
         //   PROPERTIES.setProperty("autoReconnect", "true");
 
-        tablemodel_predstaveni_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_PREDSTAVENI, 1);
+        tablemodel_predstaveni_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_PREDSTAVENI);
         tablemodel_predstaveni_pridavanidat = new PridavaniDatTableModel(SQLDOTAZ_PREDSTAVENI);
         tablemodel_film_pridavanidat = new PridavaniDatTableModel(SQLDOTAZ_FILM);
         emptytable_predstaveni = new UpravaDatTableModel();
         emptytable_film = new UpravaDatTableModel();
         emptyresulttable_predstaveni = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, "");
-        tablemodel_predstaveni_results = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI, 1);
+        tablemodel_predstaveni_results = new VyhledavaniDatTableModel(SQLDOTAZ_PREDSTAVENI);
         emptyresulttable_film = new VyhledavaniDatTableModel(SQLDOTAZ_FILM, "");
-        tablemodel_film_results = new VyhledavaniDatTableModel(SQLDOTAZ_FILM, 1);
-        tablemodel_film_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_FILM, 1);
+        tablemodel_film_results = new VyhledavaniDatTableModel(SQLDOTAZ_FILM);
+        tablemodel_film_dtb = new ZobrazeniDatTableModel(SQLDOTAZ_FILM);
         initComponents();
 
         //  HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmDataFromDTB);
@@ -1326,9 +1326,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 switch_casenumber_predstaveni = 0;
                 String querry0 = null;
                 querry0 = client.selectDataByValue(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
-                //PrepareStatement.executeSelectDatabySelectedValue(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
-                System.out.println(querry0);
-                jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(querry0, 1) {
+                jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(querry0) {
 
                     @Override //nastavení editovatelnosti data přepsaním typu na string
                     public Class getColumnClass(int column) {
@@ -1336,14 +1334,12 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                             Object o = getValueAt(row, column);
                             if (o != null && column != 1) {
                                 return o.getClass();
-
                             } else {
                                 if (o != null) {
                                     return String.class;
                                 }
                             }
                         }
-
                         return Object.class;
                     }
 
@@ -1364,8 +1360,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                         namesofDTBtables[0], namesofcolumns_filmtable[0], namesofcolumns_predstavenitable[2], namesofcolumns_predstavenitable[1],
                         jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
                 performed_querry_predstaveni_film_by_date = querry1;
-                jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(querry1, 1));
-                HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
+                HelperMethods.updateDisplayedDataInTableWithUpravaDatTableModel(jTablePredstaveniZobrazenivybranychDat, querry1);
                 String datum = jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column).toString();
                 jLabelPredstaveniPopisAktualizace.setText(datum + " hrají tyto filmy:");
                 break;
@@ -1375,9 +1370,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 switch_casenumber_predstaveni = 2;
                 String querry2 = null;
                 querry2 = client.selectDataByValueThroughInnerJoin3Columnns(jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
-                //PrepareStatement.executeSelectDatabySelectedValueUsingOneInnerJoinThreeColumns(jTablePredstaveniDatafromDTB.getModel().getValueAt(row, column));
                 performed_querry_predstaveni_film_by_idFilm = querry2;
-                jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(querry2, 1) {
+                jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(querry2) {
                     @Override
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return columnIndex == 2;
@@ -1402,8 +1396,8 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     querry0 = client.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[1],
                             jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
                                     edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_predstavenitable[0],
-                                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
-                                    }
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
+                }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
                 break;
 
@@ -1414,13 +1408,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     querry1 = client.updateEditedValueInDTB(namesofDTBtables[1], columnname,
                             jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
                                     edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
-                    
-                    /*   PrepareStatement.executeUpdateEditedValueInDTB(namesofDTBtables[1], columnname,
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0),
-                    edited_fields_predstaveni_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));*/
-
+                            jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
                 }
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTableFilmDataFromDTB, SQLDOTAZ_FILM);
@@ -1432,16 +1420,9 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     querry2 = client.updateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[2],
                             jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)),
                             namesofcolumns_predstavenitable[0], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));
-                    
-                    /*  PrepareStatement.executeUpdateEditedValueInDTB(namesofDTBtables[0], namesofcolumns_predstavenitable[2],
-                    jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), edited_fields_predstaveni_tab.get(i).get(1)),
-                    namesofcolumns_predstavenitable[0], jTablePredstaveniZobrazenivybranychDat.getModel().getValueAt(edited_fields_predstaveni_tab.get(i).get(0), 0));*/
-
                 }
-                jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(performed_querry_predstaveni_film_by_idFilm, 1));
-                HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniZobrazenivybranychDat);
+                HelperMethods.updateDisplayedDataInTableWithUpravaDatTableModel(jTablePredstaveniZobrazenivybranychDat, performed_querry_predstaveni_film_by_idFilm);
                 HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
-                //  JTableUtilities.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
                 break;
 
             default:
@@ -1459,13 +1440,11 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         edited_rows_predstaveni_tab = getDistinctIndicesOfEditedRows(edited_rows_predstaveni_tab, jTablePredstaveniPridaniDat);
         for (int i = 0; i < edited_rows_predstaveni_tab.size(); i++) {
             String querry_insert = client.insertNewRowIntoDTB_Predstaveni(jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows_predstaveni_tab.get(i), 1).toString(), jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows_predstaveni_tab.get(i), 2).toString());
-            
-            //PrepareStatement.executeInsertNewItemIntoPredstaveniTable(jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows_predstaveni_tab.get(i), 1).toString(), jTablePredstaveniPridaniDat.getModel().getValueAt(edited_rows_predstaveni_tab.get(i), 2).toString());
-
             HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
-            }
-        jTablePredstaveniPridaniDat.setModel(new PridavaniDatTableModel(SQLDOTAZ_PREDSTAVENI));
-        HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniPridaniDat);
+        }
+        HelperMethods.updateDisplayedDataInTableWithPridavaniDatTableModel(jTablePredstaveniPridaniDat, SQLDOTAZ_PREDSTAVENI);
+      //  jTablePredstaveniPridaniDat.setModel(new PridavaniDatTableModel(SQLDOTAZ_PREDSTAVENI));
+       // HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniPridaniDat);
 
     }//GEN-LAST:event_jButtonPredstaveniPridatDataActionPerformed
 
@@ -1473,115 +1452,63 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "=", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        
-        //      PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "=", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_equals, 1));
-        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeRovnoActionPerformed
 
     private void jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "=", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        
-        //    PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "=", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        //  String sqldate_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "=", jTextFieldPredstaveniVyhledavaniDatum.getText());
-
-         System.out.println(querry);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_equals, 1));
-        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
-        performed_querry_predstaveni_vyhledavani = querry;
+         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniDatumJeRovnoActionPerformed
 
     private void jButtonPredstaveniVyhledavaniDatumJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], ">", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        // PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], ">", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        //  String sqldate_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], ">", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        System.out.println(querry);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_more, 1));
-        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniDatumJeVetsiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniDatumJeMensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniDatumJeMensiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "<", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        
-        //   PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "<", jTextFieldPredstaveniVyhledavaniDatum.getText());
-        //   String sqldate_less = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[1], "<", jTextFieldPredstaveniVyhledavaniDatum.getText());
-         System.out.println(querry);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqldate_less, 1));
-        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
-        performed_querry_predstaveni_vyhledavani = querry;
+       performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniDatumJeMensiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], ">", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        
-        //  PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], ">", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        // String sqlidPredstaveni_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], ">", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        // System.out.println(sqlidPredstaveni_more);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_more, 1));
-        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeVetsiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidPredstaveniJeMensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeMensiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "<", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        
-        //  PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "<", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        //  String sqlidPredstaveni_less = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[0], "<", jSpinnerPredstaveniVyhledavaniidPredstaveni.getValue());
-        //  System.out.println(sqlidPredstaveni_less);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        //  jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidPredstaveni_less, 1));
-        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidPredstaveniJeMensiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], ">", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //    PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], ">", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //  String sqlidFilm_more = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], ">", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-
-        // System.out.println(sqlidFilm_more);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_more, 1));
-        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidFilmuJeVetsiActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidFilmuJeRovnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmuJeRovnoActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "=", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //   PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "=", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //  String sqlidFilm_equals = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "=", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //  System.out.println(sqlidFilm_equals);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_equals, 1));
-        //  JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidFilmuJeRovnoActionPerformed
 
     private void jButtonPredstaveniVyhledavaniidFilmJeMensiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniVyhledavaniidFilmJeMensiActionPerformed
         performed_querry_predstaveni_vyhledavani = null;
         String querry = client.searchBasedOnQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "<", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        
-        //  PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "<", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //   String sqlidFilm_less = PrepareStatement.SearchDataFullfilingQuantitativeRelation(namesofcolumns_predstavenitable, namesofDTBtables[0], namesofcolumns_predstavenitable[2], "<", jSpinnerPredstaveniVyhledavaniidFilm.getValue());
-        //  System.out.println(sqlidFilm_less);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, querry);
-        // jTablePredstaveniVysledkyVyhledavani.setModel(new VyhledavaniDatTableModel(sqlidFilm_less, 1));
-        // JTableUtilities.setCellsAlignment(jTablePredstaveniVysledkyVyhledavani, SwingConstants.CENTER);
         performed_querry_predstaveni_vyhledavani = querry;
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniidFilmJeMensiActionPerformed
 
@@ -1594,23 +1521,16 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
         int[] row = jTablePredstaveniVysledkyVyhledavani.getSelectedRows();
         String querry = null;
         for (int i = 0; i < row.length; i++) {
-            try {
-                querry = PrepareStatement.executeDeleteSelectedRows(namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0));
-                // String sqldotaz_delete = PrepareStatement.DeleteSelectedRows(namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0));
-                //   String sqldotaz_delete = "DELETE FROM predstaveni WHERE idPredstaveni=" + jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0) + ";";
-                // System.out.println(sqldotaz_delete);
-                // executeStatement(sqldotaz_delete);
-            } catch (SQLException ex) {
-                Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+            querry = client.deleteSelectedRows(namesofDTBtables[0], namesofcolumns_predstavenitable[0], jTablePredstaveniVysledkyVyhledavani.getModel().getValueAt(i, 0));
+           }
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniVysledkyVyhledavani, performed_querry_predstaveni_vyhledavani);
         HelperMethods.updateTableWithVyhledavaniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
-        //.setColumnWidths(jTablePredstaveniDatafromDTB, 95, 150, 50);
+        
     }//GEN-LAST:event_jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed
 
     private void jButtonPredstaveniUpravitPopisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniUpravitPopisActionPerformed
-        if (jTablePredstaveniZobrazenivybranychDat.getSelectedColumn() == jTablePredstaveniZobrazenivybranychDat.getColumnCount() - 1) {
+        if (jTablePredstaveniZobrazenivybranychDat.getSelectedColumn() == jTablePredstaveniZobrazenivybranychDat.getColumnCount() - 1
+                && jTablePredstaveniZobrazenivybranychDat.getColumnCount() > 3) {
             predstaveni_popis_filmu_selectedrow_index = jTablePredstaveniZobrazenivybranychDat.getSelectedRow();
             predstaveni_popis_filmu_selectedcolumn_index = jTablePredstaveniZobrazenivybranychDat.getSelectedColumn();
             jTextAreaPredstaveniUpravaPopisuFilmu.setText(jTablePredstaveniZobrazenivybranychDat.getValueAt(jTablePredstaveniZobrazenivybranychDat.getSelectedRow(),
@@ -1621,30 +1541,17 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
     private void jButtonPredstaveniPopisFilmuDoTabulkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniPopisFilmuDoTabulkyActionPerformed
         jTablePredstaveniZobrazenivybranychDat.setValueAt(jTextAreaPredstaveniUpravaPopisuFilmu.getText(), predstaveni_popis_filmu_selectedrow_index,
                 predstaveni_popis_filmu_selectedcolumn_index);
-        jTablePredstaveniZobrazenivybranychDat.repaint(50);
-        //System.out.println(jTextAreaPredstaveniUpravaPopisuFilmu.getText());
-        //System.out.println(predstaveni_popis_filmu_selectedrow_index);
-        // System.out.println(predstaveni_popis_filmu_selectedcolumn_index);
+        jTablePredstaveniZobrazenivybranychDat.repaint(50);        
     }//GEN-LAST:event_jButtonPredstaveniPopisFilmuDoTabulkyActionPerformed
 
     private void jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed
         String columnname = jTablePredstaveniZobrazenivybranychDat.getColumnName(predstaveni_popis_filmu_selectedcolumn_index);
         String querry = null;
-        try {
-            querry = PrepareStatement.executeUpdateEditedValueInDTB(namesofDTBtables[1], columnname,
-                    jTextAreaPredstaveniUpravaPopisuFilmu.getText(), namesofcolumns_filmtable[0],
-                    jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0));
-            /*  String sql_dotaz_test = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], columnname,
-            jTextAreaPredstaveniUpravaPopisuFilmu.getText(), namesofcolumns_filmtable[0],
-            jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0));*/
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // executeStatement(sql_dotaz_test);
-        jTablePredstaveniZobrazenivybranychDat.setModel(new UpravaDatTableModel(performed_querry_predstaveni_film_by_date, 1));
-        JTableUtilities.setCellsAlignment(jTablePredstaveniZobrazenivybranychDat, SwingConstants.CENTER);
-        HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
+        querry = client.updateEditedValueInDTB(namesofDTBtables[1], columnname,
+                jTextAreaPredstaveniUpravaPopisuFilmu.getText(), namesofcolumns_filmtable[0],
+                jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0));
+               HelperMethods.updateDisplayedDataInTableWithUpravaDatTableModel(jTablePredstaveniZobrazenivybranychDat, performed_querry_predstaveni_film_by_date);
+               HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTablePredstaveniDatafromDTB, SQLDOTAZ_PREDSTAVENI);
     }//GEN-LAST:event_jButtonPredstaveniUpravenyPopisAktualizovatVDTBActionPerformed
 
     private void jButtonFilmVyberDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilmVyberDataActionPerformed
@@ -1658,12 +1565,11 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 try {
                     querry0 = PrepareStatement.executeSelectDatabySelectedValue(namesofcolumns_filmtable, namesofDTBtables[1], namesofcolumns_filmtable[0], jTableFilmDataFromDTB.getModel().getValueAt(row, column));
                     performed_querry_film__by_value = querry0;
-//  String sql0_dotaz = PrepareStatement.selectDatabySelectedValue(namesofcolumns_filmtable, namesofDTBtables[1], namesofcolumns_filmtable[0], jTableFilmDataFromDTB.getModel().getValueAt(row, column));
                 } catch (SQLException ex) {
                     Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry0, 1) {
+                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry0) {
                     @Override
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return columnIndex != 0;
@@ -1685,7 +1591,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry1, 1) {
+                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry1) {
                     @Override
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return columnIndex != 0;
@@ -1707,7 +1613,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                 }
 
                 //  String sql2_dotaz = PrepareStatement.selectDatabySelectedValue(namesofcolumns_filmtable, namesofDTBtables[1], namesofcolumns_filmtable[2], jTableFilmDataFromDTB.getModel().getValueAt(row, column));
-                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry2, 1) {
+                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry2) {
                     @Override
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return columnIndex != 0;
@@ -1730,7 +1636,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry3, 1) {
+                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry3) {
                     @Override
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return columnIndex != 0;
@@ -1752,7 +1658,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                     Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry4, 1) {
+                jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(querry4) {
                     @Override
                     public boolean isCellEditable(int rowIndex, int columnIndex) {
                         return columnIndex != 0;
@@ -1782,13 +1688,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
                                         edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                        /*  String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], namesofcolumns_filmtable[1],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
-                edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                
-                executeStatement(sql_dotaz);*/
-                    } catch (SQLException ex) {
+                        } catch (SQLException ex) {
                         Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -1802,13 +1702,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
                                         edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                        /*  String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], namesofcolumns_filmtable[1],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
-                edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                
-                executeStatement(sql_dotaz);*/
-                    } catch (SQLException ex) {
+                        } catch (SQLException ex) {
                         Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -1822,13 +1716,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
                                         edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                        /*  String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], namesofcolumns_filmtable[1],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
-                edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                
-                executeStatement(sql_dotaz);*/
-                    } catch (SQLException ex) {
+                        } catch (SQLException ex) {
                         Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -1842,13 +1730,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
                                         edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                        /*  String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], namesofcolumns_filmtable[1],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
-                edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                
-                executeStatement(sql_dotaz);*/
-                    } catch (SQLException ex) {
+                         } catch (SQLException ex) {
                         Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -1862,13 +1744,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
                                         edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
                                 jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                        /*  String sql_dotaz = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], namesofcolumns_filmtable[1],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0),
-                edited_fields_film_tab.get(i).get(1)), namesofcolumns_filmtable[0],
-                jTableFilmZobrazeniVybranychDat.getModel().getValueAt(edited_fields_film_tab.get(i).get(0), 0));
-                
-                executeStatement(sql_dotaz);*/
-                    } catch (SQLException ex) {
+                        } catch (SQLException ex) {
                         Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -1900,16 +1776,10 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
             querry = PrepareStatement.executeUpdateEditedValueInDTB(namesofDTBtables[1], columnname,
                     jTextAreaFilmUpravaPopisu.getText(), namesofcolumns_filmtable[0],
                     jTableFilmZobrazeniVybranychDat.getValueAt(film_popis_filmu_selectedrow_index, 0));
-            /*  String sql_dotaz_test = PrepareStatement.updateEditedValueInDTB(namesofDTBtables[1], columnname,
-            jTextAreaPredstaveniUpravaPopisuFilmu.getText(), namesofcolumns_filmtable[0],
-            jTablePredstaveniZobrazenivybranychDat.getValueAt(predstaveni_popis_filmu_selectedrow_index, 0));*/
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // executeStatement(sql_dotaz_test);
-        jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(performed_querry_film__by_value, 1));
-        //   JTableUtilities.setCellsAlignment(jTableFilmZobrazeniVybranychDat, SwingConstants.CENTER);
+        jTableFilmZobrazeniVybranychDat.setModel(new UpravaDatTableModel(performed_querry_film__by_value));
         HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTableFilmDataFromDTB, SQLDOTAZ_FILM);
         jTextAreaFilmUpravaPopisu.setText(null);
     }//GEN-LAST:event_jButtonFilmAktualizovatPopisVDTBActionPerformed
@@ -1924,9 +1794,7 @@ public class JFrameJedenSvet extends javax.swing.JFrame {
 
             } catch (SQLException ex) {
                 Logger.getLogger(JFrameJedenSvet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            //  HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTableFilmDataFromDTB, SQLDOTAZ_FILM);         
+            }       
         }
         HelperMethods.updateDisplayedDataInTableWithZobrazeniDatTableModel(jTableFilmDataFromDTB, SQLDOTAZ_FILM);
         jTableFilmPridaniDat.setModel(new PridavaniDatTableModel(SQLDOTAZ_FILM));

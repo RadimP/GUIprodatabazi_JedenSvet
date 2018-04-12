@@ -5,21 +5,15 @@
  */
 package guiprodatabazi_jedensvet;
 
-import com.sun.rowset.CachedRowSetImpl;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
-import static guiprodatabazi_jedensvet.JFrameJedenSvet.PROPERTIES;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 import javax.sql.RowSetMetaData;
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
@@ -45,188 +39,92 @@ public class DataFromDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public CachedRowSet getCachedRowSet(String sqldotaz) {
         String sql = sqldotaz;
-        try (Connection connection = HelperMethods.getDBConnection();
-                Statement stmt = connection.createStatement();
+        try (Statement stmt = HelperMethods.getDBConnection().createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
             crs.populate(rs);
-            rs.close();
-            stmt.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return crs;
-
+    }
+    
+    private int getColumnCount(CachedRowSet crs) throws SQLException {
+    int columns;
+    RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
+    return  columns = md.getColumnCount();    
+    }
+    
+    private Vector<Vector<Object>> extractDataFromRowSet(CachedRowSet crs, int columncount) throws SQLException {
+     while (crs.next()) {
+                Vector<Object> row = new Vector<Object>(columncount);
+                for (int i = 1; i <= columncount; i++) if (/* i != 2*/ crs.getObject(i).toString().length() > 4 && crs.getObject(i).toString().charAt(4) != '-') { 
+                        row.addElement(crs.getObject(i));
+                    } else {
+                        row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(crs.getObject(i).toString()));
+                    }
+                data.addElement(row);           
+        } 
+        return data;      
     }
 
     public Vector<Vector<Object>> getDataFromSQLDatabase(String sqldotaz) {
         String sql = sqldotaz;
         try {
-
             crs = client.getCachedRowset(sql);
-
-            RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
-            int columns = md.getColumnCount();
-
-            while (crs.next()) {
-                Vector<Object> row = new Vector<Object>(columns);
-
-                for (int i = 1; i <= columns; i++) {
-                    row.addElement(crs.getObject(i));
-                }
-
-                data.addElement(row);
-            }
-
+           int columns = getColumnCount(crs);
+          data = extractDataFromRowSet(crs, columns);           
         } catch (SQLException ex) {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
     }
 
-    /*   public Vector<Vector<Object>> getDataFromSQLDatabase(String sqldotaz) {
-        String sql = sqldotaz;
-        try (Connection connection = HelperMethods.getDBConnection();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-            crs = client.getCachedRowset(sql);
-            RowSetMetaData md = (RowSetMetaData)crs.getMetaData();
-          //  ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-           
-            while (crs.next()) {
-                Vector<Object> row = new Vector<Object>(columns);
-
-                for (int i = 1; i <= columns; i++) {
-                    row.addElement(crs.getObject(i));
-                }
-
-                data.addElement(row);
-            }
-
-            rs.close();
-            stmt.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return data;
-    }
-     */
     public String[] getColumnNamesFromSQLDatabaseAsArray(String sqldotaz) {
         String[] columnNamesArray = null;
-        String sql = sqldotaz;
         try {
-
-            crs = client.getCachedRowset(sql);
-
+            crs = client.getCachedRowset(sqldotaz);
             RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
             int columns = md.getColumnCount();
             columnNamesArray = new String[columns];
-            //  Get column names
             for (int i = 1; i <= columns; i++) {
-
                 columnNamesArray[i - 1] = md.getColumnName(i);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return columnNamesArray;
     }
 
-    /*   public String[] getColumnNamesFromSQLDatabaseAsArray(String sqldotaz) {
-        String[] columnNamesArray = null;
-        String sql = sqldotaz;
-
-        try (Connection connection = HelperMethods.getDBConnection();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-            ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-            columnNamesArray = new String[columns];
-            //  Get column names
-            for (int i = 1; i <= columns; i++) {
-
-                columnNamesArray[i - 1] = md.getColumnName(i);
-            }
-
-            rs.close();
-            stmt.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return columnNamesArray;
-
-    }*/
-    public Vector<Object> getColumnNamesFromSQLDatabase(String sqldotaz) {
-        String sql = sqldotaz;
+      public Vector<Object> getColumnNamesFromSQLDatabase(String sqldotaz) {
         try {
-            crs = client.getCachedRowset(sql);
-
+            crs = client.getCachedRowset(sqldotaz);
             RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
             int columns = md.getColumnCount();
-
-            //  Get column names
             for (int i = 1; i <= columns; i++) {
-
                 columnNames.addElement(md.getColumnName(i));
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return columnNames;
     }
-
-    /*   public Vector<Object> getColumnNamesFromSQLDatabase(String sqldotaz) {
-
-        String sql = sqldotaz;
-        try (Connection connection = HelperMethods.getDBConnection();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-
-            ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-
-            //  Get column names
-            for (int i = 1; i <= columns; i++) {
-
-                columnNames.addElement(md.getColumnName(i));
-
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return columnNames;
-
-    }*/
+      
     public Object[][] get4RowEmptyArray(String sqldotaz) {
         Object[][] emptydata = null;
         String sql = sqldotaz;
         try {
             crs = client.getCachedRowset(sql);
-            RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
-            int columns = md.getColumnCount();
+            int columns = getColumnCount(crs);
             emptydata = new Object[4][columns];
-            //  Get row data
             for (int j = 0; j < 4; j++) {
                 Object[] emptyrow = new Object[columns];
-
                 for (int i = 0; i < columns; i++) {
-                    //    row.addElement(rs.getObject(i));
                     emptyrow[i] = null;
                 }
-
                 emptydata[j] = emptyrow;
             }
         } catch (SQLException ex) {
@@ -234,52 +132,18 @@ public class DataFromDatabase {
         }
         return emptydata;
     }
-
-    /*  public Object[][] get4RowEmptyArray(String sqldotaz) {
-        Object[][] emptydata = null;
-
+    
+  /*  public Vector<Vector<Object>> getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(String sqldotaz) {
         String sql = sqldotaz;
-
-        try (Connection connection = HelperMethods.getDBConnection();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-
-            ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-            emptydata = new Object[4][columns];
-            //  Get row data
-            for (int j = 0; j < 4; j++) {
-                Object[] emptyrow = new Object[columns];
-
-                for (int i = 0; i < columns; i++) {
-                    //    row.addElement(rs.getObject(i));
-                    emptyrow[i] = null;
-                }
-
-                emptydata[j] = emptyrow;
-            }
-
-            rs.close();
-            stmt.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return emptydata;
-    }*/
-    public Vector<Vector<Object>> getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(String sqldotaz) {
-        String sql = sqldotaz;
+        System.out.println(sql);
         try {
-
             crs = client.getCachedRowset(sql);
-            RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
-            int columns = md.getColumnCount();
-
-            //  Get row data
+            int columns = getColumnCount(crs);
+            System.out.println(columns);
             while (crs.next()) {
                 Vector<Object> row = new Vector<Object>(columns);
                 for (int i = 1; i <= columns; i++) {
-                    if (i != 2) {
+                    if ( i != 2 crs.getObject(i).toString().length() > 4 && crs.getObject(i).toString().charAt(4) != '-') { 
                         row.addElement(crs.getObject(i));
                     } else {
                         row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(crs.getObject(i).toString()));
@@ -291,38 +155,5 @@ public class DataFromDatabase {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
-    }
-
-    /*   public Vector<Vector<Object>> getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(String sqldotaz) {
-        String sql = sqldotaz;
-
-        try (Connection connection = HelperMethods.getDBConnection();
-                Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery(sql);) {
-
-            ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-
-            //  Get row data
-            while (rs.next()) {
-                Vector<Object> row = new Vector<Object>(columns);
-
-                for (int i = 1; i <= columns; i++) {
-                    if (i != 2) {
-                        row.addElement(rs.getObject(i));
-                    } else {
-                        row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(rs.getObject(i).toString()));
-                    }
-                }
-
-                data.addElement(row);
-            }
-
-            rs.close();
-            stmt.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return data;
     }*/
-}
+    }

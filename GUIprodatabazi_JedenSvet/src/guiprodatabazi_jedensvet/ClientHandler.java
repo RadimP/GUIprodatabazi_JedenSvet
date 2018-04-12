@@ -57,12 +57,9 @@ class ClientHandler extends Thread {
                     this.s.close();
                     System.out.println("Connection closed");
                     break;
-                }
+                }             
 
                 
-
-                // write on output stream based on the
-                // answer from the client
                 switch (received) {
 
                     case "DATASELECTIONBYVALUE":
@@ -99,10 +96,15 @@ class ClientHandler extends Thread {
                          case "DATASEARCHQUANTITATIVE":
                         DataSearchQuantitativeRelation datasearch = (DataSearchQuantitativeRelation) ois.readObject();
                         if ("Datum".equals(datasearch.getColumnnameDTBtable())) {datasearch.setValue((Object) HelperMethods.convertDateStringWithPointsToDatabaseFormat(datasearch.getValue().toString()));}
-                        String querrysearch = PrepareStatement.SearchDataFullfilingQuantitativeRelation(datasearch.getNamesOfColumnsDTBtable(), datasearch.getNameOfDTBtable(), datasearch.getColumnnameDTBtable(), datasearch.getRelation(), datasearch.getValue());
+                        String querrysearch = PrepareStatement.executeSearchDataFullfilingQuantitativeRelation(datasearch.getNamesOfColumnsDTBtable(), datasearch.getNameOfDTBtable(), datasearch.getColumnnameDTBtable(), datasearch.getRelation(), datasearch.getValue());
                         System.out.println("Data searched.");
-                        System.out.println(querrysearch);
                         dos.writeUTF(querrysearch);
+                        break;
+                        case "ROWSDELETION":
+                        DeletionOfSelectedRows rowsdeletion = (DeletionOfSelectedRows) ois.readObject();
+                        String querrydeletion = PrepareStatement.executeDeleteSelectedRows(rowsdeletion.getNameofDTBtable(), rowsdeletion.getCondition_columnnameDTBtable(), rowsdeletion.getCondition_value());
+                        System.out.println("Data deleted.");
+                        dos.writeUTF(querrydeletion);
                         break;
                     case "SELECT":
                         querry = message[0] + " " + message[1];

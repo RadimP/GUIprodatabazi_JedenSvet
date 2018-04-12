@@ -229,7 +229,7 @@ public class PrepareStatement {
         return querry;       
     }
 
-    public static String updateEditedValueInDTB(String nameofDTBtable, String nameofupdatedcolumn, Object newvalue, String nameofconditioncolumn, Object valueofcondition) {
+ /*   public static String updateEditedValueInDTB(String nameofDTBtable, String nameofupdatedcolumn, Object newvalue, String nameofconditioncolumn, Object valueofcondition) {
         if ("Datum".equals(nameofupdatedcolumn)) {
             newvalue = HelperMethods.convertDateStringWithPointsToDatabaseFormat(newvalue.toString());
         }
@@ -237,7 +237,7 @@ public class PrepareStatement {
         String sql_dotaz = "UPDATE " + nameofDTBtable + " SET " + nameofupdatedcolumn + " = " + "\"" + newvalue + "\"" + " WHERE " + nameofconditioncolumn + " = " + "\"" + valueofcondition + "\"" + ";";
 
         return sql_dotaz;
-    }
+    }*/
 
     public static String executeSearchDataFullfilingQuantitativeRelation(String[] namesofcolumnsDTBtable, String nameofDTBtable, String columnnameDTBtable, String relation, Object value) throws SQLException {
     PreparedStatement st = null;
@@ -274,19 +274,19 @@ public class PrepareStatement {
         return querry;      
     }
     
-    public static String SearchDataFullfilingQuantitativeRelation(String[] namesofcolumnsDTBtable, String nameofDTBtable, String columnnameDTBtable, String relation, Object value) {
+ /*   public static String SearchDataFullfilingQuantitativeRelation(String[] namesofcolumnsDTBtable, String nameofDTBtable, String columnnameDTBtable, String relation, Object value) {
         if (columnnameDTBtable == "Datum") {
             value = HelperMethods.convertDateStringWithPointsToDatabaseFormat(value.toString());
         }
         String sql_relation = "select " + HelperMethods.normalizeArrayOfColumnNamesForSQLQuerry(namesofcolumnsDTBtable, nameofDTBtable) + " from " + nameofDTBtable + " where " + columnnameDTBtable + relation
                 + "\"" + value + "\";";
         return sql_relation;
-    }
+    }*/
 
-    public static String DeleteSelectedRows(String nameofDTBtable, String condition_columnnameDTBtable, Object condition_value) {
+  /*  public static String DeleteSelectedRows(String nameofDTBtable, String condition_columnnameDTBtable, Object condition_value) {
         String sqldotaz_delete = "DELETE FROM " + nameofDTBtable + " WHERE " + condition_columnnameDTBtable + "=" + condition_value + ";";
         return sqldotaz_delete;
-    }
+    }*/
     
     public static String executeDeleteSelectedRows(String nameofDTBtable, String condition_columnnameDTBtable, Object condition_value) throws SQLException {
     PreparedStatement st = null;

@@ -30,8 +30,7 @@ public class DataFromDatabase {
     Vector<Vector<Object>> data = new Vector<Vector<Object>>();
     RowSetFactory factory;
     CachedRowSet crs;
-    Properties properties = new Properties();
-
+    
     public DataFromDatabase() {
         try {
             this.factory = RowSetProvider.newFactory();
@@ -51,32 +50,34 @@ public class DataFromDatabase {
         }
         return crs;
     }
-    
+
     private int getColumnCount(CachedRowSet crs) throws SQLException {
-    int columns;
-    RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
-    return  columns = md.getColumnCount();    
+        int columns;
+        RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
+        return columns = md.getColumnCount();
     }
-    
+
     private Vector<Vector<Object>> extractDataFromRowSet(CachedRowSet crs, int columncount) throws SQLException {
-     while (crs.next()) {
-                Vector<Object> row = new Vector<Object>(columncount);
-                for (int i = 1; i <= columncount; i++) if (/* i != 2*/ crs.getObject(i).toString().length() > 4 && crs.getObject(i).toString().charAt(4) != '-') { 
-                        row.addElement(crs.getObject(i));
-                    } else {
-                        row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(crs.getObject(i).toString()));
-                    }
-                data.addElement(row);           
-        } 
-        return data;      
+        while (crs.next()) {
+            Vector<Object> row = new Vector<Object>(columncount);
+            for (int i = 1; i <= columncount; i++) { if (crs.getObject(i) != null) {
+                if (crs.getObject(i).toString().length() > 4 && crs.getObject(i).toString().charAt(4) != '-') {
+                    row.addElement(crs.getObject(i));
+                } else {
+                    row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(crs.getObject(i).toString()));
+                }
+            } else {row.addElement(crs.getObject(i));}}
+            data.addElement(row);
+        }
+        return data;
     }
 
     public Vector<Vector<Object>> getDataFromSQLDatabase(String sqldotaz) {
         String sql = sqldotaz;
         try {
             crs = client.getCachedRowset(sql);
-           int columns = getColumnCount(crs);
-          data = extractDataFromRowSet(crs, columns);           
+            int columns = getColumnCount(crs);
+            data = extractDataFromRowSet(crs, columns);
         } catch (SQLException ex) {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,7 +100,7 @@ public class DataFromDatabase {
         return columnNamesArray;
     }
 
-      public Vector<Object> getColumnNamesFromSQLDatabase(String sqldotaz) {
+    public Vector<Object> getColumnNamesFromSQLDatabase(String sqldotaz) {
         try {
             crs = client.getCachedRowset(sqldotaz);
             RowSetMetaData md = (RowSetMetaData) crs.getMetaData();
@@ -109,10 +110,10 @@ public class DataFromDatabase {
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return columnNames;
     }
-      
+
     public Object[][] get4RowEmptyArray(String sqldotaz) {
         Object[][] emptydata = null;
         String sql = sqldotaz;
@@ -132,28 +133,4 @@ public class DataFromDatabase {
         }
         return emptydata;
     }
-    
-  /*  public Vector<Vector<Object>> getDataFromSQLDatabaseWithDatesStringConvertedToCzechFormat(String sqldotaz) {
-        String sql = sqldotaz;
-        System.out.println(sql);
-        try {
-            crs = client.getCachedRowset(sql);
-            int columns = getColumnCount(crs);
-            System.out.println(columns);
-            while (crs.next()) {
-                Vector<Object> row = new Vector<Object>(columns);
-                for (int i = 1; i <= columns; i++) {
-                    if ( i != 2 crs.getObject(i).toString().length() > 4 && crs.getObject(i).toString().charAt(4) != '-') { 
-                        row.addElement(crs.getObject(i));
-                    } else {
-                        row.addElement(HelperMethods.convertDateStringWithMinusSignToStandardCzechFormat(crs.getObject(i).toString()));
-                    }
-                }
-                data.addElement(row);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DataFromDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return data;
-    }*/
-    }
+}   

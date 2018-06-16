@@ -9,46 +9,29 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.net.*;
- 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 // Server class
-public class Server 
-{
-    public static void main(String[] args) throws IOException 
-    {
-        // server is listening on port 5056
-        ServerSocket ss = new ServerSocket(5056);
-         
-        // running infinite loop for getting
-        // client request
-        while (true) 
-        {
+public class Server {
+final static int PORT = 5056;
+    public static void main(String[] args) throws IOException {
+        ServerSocket ss = new ServerSocket(PORT);
+        while (true) {
             Socket s = null;
-             
-            try
-            {
-                // socket object to receive incoming client requests
-                s = ss.accept();
-                 
+            try {
+                 s = ss.accept(); 
+                 DataInputStream dis = new DataInputStream(s.getInputStream());
+                    DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+                    ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+                    ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
                 System.out.println("A new client is connected : " + s);
-                 
-                // obtaining input and out streams
-                DataInputStream dis = new DataInputStream(s.getInputStream());
-                DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-                ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
-		ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
-                 
                 System.out.println("Assigning new thread for this client");
- 
-                // create a new thread object
                 Thread t = new ClientHandler(s, dis, dos, ois, oos);
- 
-                // Invoking the start() method
                 t.start();
-                 
-            }
-            catch (Exception e){
+            } catch (IOException e) {
                 s.close();
-                e.printStackTrace();
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }

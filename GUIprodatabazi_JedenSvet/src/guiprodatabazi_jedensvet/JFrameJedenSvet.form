@@ -22,7 +22,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,73,0,0,4,88"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,79,0,0,4,-78"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
@@ -63,29 +63,55 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="228" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabelPassword" max="32767" attributes="0"/>
+                              <Component id="jLabelUser" max="32767" attributes="0"/>
+                              <Component id="jTextFieldUser" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jPasswordFromUser" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButtonPrihlasit" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabelPredstaveniDatavDTB" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane5" alignment="2" min="-2" pref="280" max="-2" attributes="0"/>
                           <Component id="jButtonPredstaveniVyberData" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTabbedPanePredstaveniVnoreny" alignment="2" min="-2" pref="644" max="-2" attributes="0"/>
+                          <Component id="jTabbedPanePredstaveniVnoreny" alignment="2" min="-2" pref="867" max="-2" attributes="0"/>
+                          <Component id="jLabelPredstaveniDatavDTB" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="229" max="32767" attributes="0"/>
+                      <EmptySpace pref="122" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jLabelPredstaveniDatavDTB" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jScrollPane5" min="-2" pref="91" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonPredstaveniVyberData" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTabbedPanePredstaveniVnoreny" min="-2" pref="592" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelPredstaveniDatavDTB" alignment="3" pref="18" max="32767" attributes="0"/>
+                          <Component id="jLabelUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane5" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jButtonPredstaveniVyberData" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="jTabbedPanePredstaveniVnoreny" min="-2" pref="592" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jTextFieldUser" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabelPassword" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jPasswordFromUser" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonPrihlasit" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -121,6 +147,14 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="jLabelPredstaveniDatavDTB">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Tabulka Predstaveni - data v datab&#xe1;zi"/>
+              </Properties>
+            </Component>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPanePredstaveniVnoreny">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor" postCode="jTabbedPanePredstaveniVnoreny.setUI(new BasicTabbedPaneUI() {&#xa;            @Override&#xa;            protected void installDefaults() {&#xa;                super.installDefaults();&#xa;                highlight = Color.LIGHT_GRAY;&#xa;                lightHighlight = Color.LIGHT_GRAY;&#xa;                shadow = Color.LIGHT_GRAY;&#xa;                darkShadow = Color.LIGHT_GRAY;&#xa;                focus = Color.LIGHT_GRAY;&#xa;            }&#xa;        });">
@@ -152,37 +186,38 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="2" attributes="0">
-                                          <Component id="jLabelPredstaveniPopisAktualizace" alignment="2" min="-2" pref="552" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane6" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="jButtonPredstaveniUpravenyPopisAktualizovatVDTB" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                                      <Component id="jButtonPredstaveniPopisFilmuDoTabulky" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="jButtonPredstaveniAktualizujVDTB" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                                      <Component id="jButtonPredstaveniUpravitPopis" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                              <Component id="jButtonPredstaveniUpravenyPopisAktualizovatVDTB" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="jButtonPredstaveniPopisFilmuDoTabulky" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                                              <Component id="jLabelPredstaveniUparavaPopisFilmu" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane3" min="-2" pref="298" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jButtonPredstaveniAktualizujVDTB" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="jButtonPredstaveniUpravitPopis" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
-                                      <Component id="jLabelPredstaveniUparavaPopisFilmu" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane3" min="-2" pref="298" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="jLabelPredstaveniPopisAktualizace" alignment="2" min="-2" pref="552" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane6" alignment="2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="153" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -198,7 +233,7 @@
                                   <Component id="jButtonPredstaveniAktualizujVDTB" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonPredstaveniUpravitPopis" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace pref="79" max="32767" attributes="0"/>
                               <Component id="jLabelPredstaveniUparavaPopisFilmu" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="85" max="-2" attributes="0"/>
@@ -207,7 +242,7 @@
                                   <Component id="jButtonPredstaveniUpravenyPopisAktualizovatVDTB" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonPredstaveniPopisFilmuDoTabulky" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="120" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -345,27 +380,27 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="208" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="2" attributes="0">
                                   <Component id="jLabelPredstaveniPridaniDat" alignment="2" min="-2" pref="304" max="-2" attributes="0"/>
                                   <Component id="jScrollPane1" alignment="2" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonPredstaveniPridatData" alignment="2" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="90" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                               <Component id="jLabelPredstaveniPridaniDat" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="147" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="jButtonPredstaveniPridatData" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="155" max="32767" attributes="0"/>
+                              <EmptySpace pref="157" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -435,11 +470,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="373" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerPredstaveniVyhledavaniidFilm" pref="50" max="32767" attributes="0"/>
-                                      <EmptySpace min="147" pref="147" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -473,32 +503,45 @@
                                               </Group>
                                               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jSpinnerPredstaveniVyhledavaniidPredstaveni" min="-2" pref="44" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jSpinnerPredstaveniVyhledavaniidPredstaveni" max="32767" attributes="0"/>
-                                                      <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
+                                                      <Component id="jTextFieldPredstaveniVyhledavaniDatum" min="-2" pref="98" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                                      <Component id="jLabelPredstaveniVyhledaniPodleidKina" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="97" max="32767" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                          <Component id="jButtonPredstaveniVyhledavaniidKinoiJeRovno" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="jButtonPredstaveniVyhledavaniidKinoJeVetsi" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="jButtonPredstaveniVyhledavaniidKinoJeMensi" alignment="1" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerPredstaveniVyhledavaniidKino" min="-2" pref="44" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="jTextFieldPredstaveniVyhledavaniDatum" min="-2" pref="98" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="86" pref="86" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="2" attributes="0">
-                                              <Component id="jLabelPredstaveniVyhledavaniVysledky" alignment="2" min="-2" pref="163" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane2" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jButtonPredstaveniVyhledavavniOdstranitVysledky" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                              <Component id="jButtonPredstaveniVyhledavaniVymazatVybraneVysledky" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="373" max="-2" attributes="0"/>
+                                      <Component id="jSpinnerPredstaveniVyhledavaniidFilm" min="-2" pref="46" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="2" attributes="0">
+                                      <Component id="jLabelPredstaveniVyhledavaniVysledky" alignment="2" min="-2" pref="163" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonPredstaveniVyhledavavniOdstranitVysledky" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                      <Component id="jButtonPredstaveniVyhledavaniVymazatVybraneVysledky" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -528,17 +571,34 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonPredstaveniVyhledavaniidPredstaveniJeMensi" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="jButtonPredstaveniVyhledavaniDatumJeVetsi" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldPredstaveniVyhledavaniDatum" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelPredstaverniVyhledavaniDatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonPredstaveniVyhledavaniDatumJeRovno" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jButtonPredstaveniVyhledavaniidPredstaveniJeMensi" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                      <Component id="jButtonPredstaveniVyhledavaniDatumJeVetsi" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jTextFieldPredstaveniVyhledavaniDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelPredstaveniVyhledaniPodleidKina" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabelPredstaverniVyhledavaniDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButtonPredstaveniVyhledavaniDatumJeRovno" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButtonPredstaveniVyhledavaniDatumJeMensi" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jButtonPredstaveniVyhledavaniidKinoJeVetsi" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jButtonPredstaveniVyhledavaniidKinoiJeRovno" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerPredstaveniVyhledavaniidKino" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButtonPredstaveniVyhledavaniidKinoJeMensi" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonPredstaveniVyhledavaniDatumJeMensi" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="jButtonPredstaveniVyhledavaniidFilmuJeVetsi" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -551,7 +611,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonPredstaveniVyhledavaniidFilmJeMensi" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="37" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabelPredstaveniVyhledavaniVysledky" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="104" max="-2" attributes="0"/>
@@ -560,7 +620,7 @@
                                   <Component id="jButtonPredstaveniVyhledavavniOdstranitVysledky" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonPredstaveniVyhledavaniVymazatVybraneVysledky" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <EmptySpace pref="36" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -773,18 +833,53 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPredstaveniVyhledavaniVymazatVybraneVysledkyActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JLabel" name="jLabelPredstaveniVyhledaniPodleidKina">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="idKino"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonPredstaveniVyhledavaniidKinoJeVetsi">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="je v&#x11b;t&#x161;&#xed;"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPredstaveniVyhledavaniidKinoJeVetsiActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonPredstaveniVyhledavaniidKinoiJeRovno">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="je rovno"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPredstaveniVyhledavaniidKinoiJeRovnoActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonPredstaveniVyhledavaniidKinoJeMensi">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="je men&#x161;&#xed;"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPredstaveniVyhledavaniidKinoJeMensiActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="jSpinnerPredstaveniVyhledavaniidKino">
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabelPredstaveniDatavDTB">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Tabulka Predstaveni - data v datab&#xe1;zi"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="jButtonPredstaveniVyberData">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -794,6 +889,48 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPredstaveniVyberDataActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelPassword">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Heslo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelUser">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="P&#x159;ihla&#x161;ovac&#xed; jm&#xe9;no"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldUser">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[16, 23]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jPasswordFromUser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonPrihlasit">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="P&#x159;ihl&#xe1;sit"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPrihlasitActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -817,33 +954,29 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="jLabelFilmDatavDTB" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane4" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonFilmVyberData" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTabbedPaneFilmVnoreny" alignment="2" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="313" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                      <Component id="jTabbedPaneFilmVnoreny" min="-2" pref="784" max="-2" attributes="0"/>
-                      <EmptySpace min="166" pref="166" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Component id="jLabelFilmDatavDTB" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane4" min="-2" pref="151" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonFilmVyberData" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jTabbedPaneFilmVnoreny" pref="533" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="jTabbedPaneFilmVnoreny" pref="575" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -872,6 +1005,11 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="jPanelFilmHlavni"/>
+                    </Property>
+                  </AccessibilityProperties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTablePredstaveniDatafromDTB);"/>
                   </AuxValues>
@@ -912,27 +1050,29 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                                      <Component id="jButtonFilmAktualizovatPopisVDTB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButtonFilmAktualizovatPopisVDTB" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Component id="jButtonFilmPopisUlozitDoTabulky" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButtonFilmPopisUlozitDoTabulky" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="jScrollPane7" alignment="2" max="32767" attributes="0"/>
                                           <Component id="jLabelFilmPopisAktualizace" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane7" alignment="2" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabelFilmUpravaPopisu" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane8" alignment="2" min="-2" pref="307" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane8" alignment="2" min="-2" pref="427" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
-                                      <Component id="jButtonFilmAktualizujVDTB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButtonFilmAktualizujVDTB" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                      <Component id="jButtonFilmUpravitPopis" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButtonFilmUpravitPopis" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="174" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -941,23 +1081,23 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Component id="jLabelFilmPopisAktualizace" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane7" min="-2" pref="131" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButtonFilmAktualizujVDTB" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonFilmUpravitPopis" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonFilmAktualizujVDTB" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jButtonFilmUpravitPopis" alignment="3" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelFilmUpravaPopisu" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane8" min="-2" pref="84" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane8" pref="90" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButtonFilmAktualizovatPopisVDTB" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButtonFilmPopisUlozitDoTabulky" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonFilmAktualizovatPopisVDTB" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jButtonFilmPopisUlozitDoTabulky" alignment="3" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="86" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -975,15 +1115,17 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="14" style="0"/>
                             </Property>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmDataFromDTB);">
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmZobrazeniVybranychDat);">
                               <Connection code="emptytable_film" type="code"/>
                             </Property>
+                            <Property name="autoResizeMode" type="int" value="3"/>
                             <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                               <JTableSelectionModel selectionMode="0"/>
                             </Property>
                           </Properties>
                           <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
                             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmZobrazeniVybranychDat);"/>
                           </AuxValues>
                         </Component>
@@ -1040,6 +1182,9 @@
                             <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="5"/>
                             <Property name="wrapStyleWord" type="boolean" value="true"/>
+                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[204, 20]"/>
+                            </Property>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1084,10 +1229,10 @@
                               <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="2" attributes="0">
                                   <Component id="jLabelFilmiPridaniDat" alignment="2" min="-2" pref="304" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane9" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane9" alignment="2" max="32767" attributes="0"/>
                                   <Component id="jButtonFilmiPridatData" alignment="2" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="168" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1100,7 +1245,7 @@
                               <Component id="jScrollPane9" min="-2" pref="147" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="jButtonFilmiPridatData" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="154" max="32767" attributes="0"/>
+                              <EmptySpace pref="196" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1170,18 +1315,65 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                      <Component id="jLabelFilmVyhledavaniPopisVolby" min="-2" pref="177" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabelFilmVyhledaniPodleidFilm" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelFilmVyhledaniPodleReziser" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="2" attributes="0">
+                                                          <Component id="jLabelFilmVyhledavaniVysledky" alignment="2" min="-2" pref="163" max="-2" attributes="0"/>
+                                                          <Component id="jScrollPane13" alignment="2" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jButtonFilmVyhledavavniOdstranitVysledky" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                                      <Component id="jButtonFilmiVyhledavaniVymazatVybraneVysledky" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="jLabelFilmVyhledaniPodleReziser" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jButtonFilmVyhledavaniReziserObsahuje" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jButtonFilmVyhledavaniReziserJe" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jButtonFilmVyhledavaniReziserZacina" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jButtonFilmVyhledavaniReziserKonciNa" min="-2" pref="145" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane11" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jLabelFilmVyhledaniPodlePopis" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                          <Component id="jButtonFilmVyhledavaniPopisObsahuje" alignment="0" pref="157" max="32767" attributes="0"/>
+                                                          <Component id="jButtonFilmVyhledavaniPopisJe" alignment="1" max="32767" attributes="0"/>
+                                                          <Component id="jButtonFilmVyhledavaniPopisKonciNa" alignment="1" max="32767" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Component id="jButtonFilmVyhledavaniPopisZacina" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane12" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                              <Component id="jLabelFilmVyhledavaniPopisVolby" min="-2" pref="177" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabelFilmVyhledaniPodleidFilm" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                   <Component id="jButtonFilmVyhledavaniidFilmJeRovno" alignment="1" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jButtonFilmVyhledavaniidFilmJeMensi" alignment="1" min="-2" pref="85" max="-2" attributes="0"/>
@@ -1210,56 +1402,12 @@
                                               </Group>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jScrollPane10" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="jButtonFilmVyhledavaniReziserObsahuje" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jButtonFilmVyhledavaniReziserJe" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jButtonFilmVyhledavaniReziserZacina" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jButtonFilmVyhledavaniReziserKonciNa" min="-2" pref="145" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jScrollPane11" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Group type="103" groupAlignment="1" attributes="0">
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="jLabelFilmVyhledaniPodlePopis" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                                  <Component id="jButtonFilmVyhledavaniPopisObsahuje" alignment="0" pref="157" max="32767" attributes="0"/>
-                                                                  <Component id="jButtonFilmVyhledavaniPopisJe" alignment="1" max="32767" attributes="0"/>
-                                                                  <Component id="jButtonFilmVyhledavaniPopisKonciNa" alignment="1" max="32767" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
-                                                          <Component id="jButtonFilmVyhledavaniPopisZacina" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="103" alignment="0" groupAlignment="2" attributes="0">
-                                                              <Component id="jLabelFilmVyhledavaniVysledky" alignment="2" min="-2" pref="163" max="-2" attributes="0"/>
-                                                              <Component id="jScrollPane13" alignment="2" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="jButtonFilmVyhledavavniOdstranitVysledky" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                                              <Component id="jButtonFilmiVyhledavaniVymazatVybraneVysledky" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane12" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1325,52 +1473,54 @@
                                       </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="11" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                      <Component id="jLabelFilmVyhledaniPodleReziser" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane12" min="-2" pref="79" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="jButtonFilmVyhledavaniReziserZacina" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jButtonFilmVyhledavaniReziserJe" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jButtonFilmVyhledavaniReziserObsahuje" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jButtonFilmVyhledavaniReziserKonciNa" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Component id="jButtonFilmVyhledavaniPopisZacina" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jButtonFilmVyhledavaniReziserJe" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jButtonFilmVyhledavaniReziserObsahuje" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                                      <Component id="jLabelFilmVyhledaniPodleReziser" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jScrollPane11" min="-2" pref="79" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButtonFilmVyhledavaniReziserKonciNa" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jButtonFilmVyhledavaniPopisZacina" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jButtonFilmVyhledavaniPopisJe" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="jButtonFilmVyhledavaniPopisObsahuje" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                                       <Component id="jLabelFilmVyhledaniPodlePopis" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jButtonFilmVyhledavaniPopisKonciNa" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="jScrollPane12" min="-2" pref="79" max="-2" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane11" min="-2" pref="79" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      <Component id="jButtonFilmVyhledavaniPopisKonciNa" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <EmptySpace pref="71" max="32767" attributes="0"/>
                               <Component id="jLabelFilmVyhledavaniVysledky" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane13" min="-2" pref="104" max="-2" attributes="0"/>
@@ -1782,6 +1932,7 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tabulka Film - data v datab&#xe1;zi"/>
+                <Property name="alignmentX" type="float" value="0.5"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonFilmVyberData">
@@ -1790,6 +1941,7 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Vyber ozna&#x10d;en&#xe1; data"/>
+                <Property name="alignmentX" type="float" value="0.5"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFilmVyberDataActionPerformed"/>
@@ -1816,15 +1968,346 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1101" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="437" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabelKinoDatavDTB" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane14" alignment="2" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButtonKinoVyberkina" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="366" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
+                      <Component id="jTabbedPaneKinoVnoreny" min="-2" pref="801" max="-2" attributes="0"/>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="804" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="jLabelKinoDatavDTB" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane14" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButtonKinoVyberkina" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <Component id="jTabbedPaneKinoVnoreny" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabelKinoDatavDTB">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Tabulka Kino - data v datab&#xe1;zi"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane14">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTableKinoDatafromDTB">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableKinoDatafromDTB);">
+                      <Connection code="tablemodel_kino_dtb" type="code"/>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JTabbedPane" name="jTabbedPaneKinoVnoreny">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTabbedPane()"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTabbedPaneKinoVnoreny.setUI(new BasicTabbedPaneUI() {&#xa;            @Override&#xa;            protected void installDefaults() {&#xa;                super.installDefaults();&#xa;                highlight = Color.LIGHT_GRAY;&#xa;                lightHighlight = Color.LIGHT_GRAY;&#xa;                shadow = Color.LIGHT_GRAY;&#xa;                darkShadow = Color.LIGHT_GRAY;&#xa;                focus = Color.LIGHT_GRAY;&#xa;            }&#xa;        });"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JPanel" name="jPanelKinoProgram">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="14" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Program kina">
+                        <Property name="tabTitle" type="java.lang.String" value="Program kina"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
+                              <Component id="jLabelKinoProgram" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane15" pref="776" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jLabelKinoProgram" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="jScrollPane15" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace pref="302" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabelKinoProgram">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Program kina"/>
+                      </Properties>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane15">
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="jTableKInoZobrazeniVybranychDat">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="0"/>
+                            </Property>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="emptytable_film" type="code"/>
+                            </Property>
+                            <Property name="autoResizeMode" type="int" value="4"/>
+                            <Property name="cellSelectionEnabled" type="boolean" value="true"/>
+                            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                              <JTableSelectionModel selectionMode="0"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableFilmZobrazeniVybranychDat);"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanelKinoVnorenyPridavani">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="P&#x159;&#xed;d&#xe1;v&#xe1;n&#xed; kin">
+                        <Property name="tabTitle" type="java.lang.String" value="P&#x159;&#xed;d&#xe1;v&#xe1;n&#xed; kin"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="jLabelKInoiPridaniDat" alignment="2" min="-2" pref="304" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane16" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="jButtonKinoPridatData" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="jLabelKInoiPridaniDat" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane16" min="-2" pref="147" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="jButtonKinoPridatData" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="180" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabelKInoiPridaniDat">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="text" type="java.lang.String" value="Tabulka pro p&#x159;id&#xe1;n&#xed; kin do datab&#xe1;ze"/>
+                      </Properties>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane16">
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="jTableKinoPridaniDat">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                                <EtchetBorder/>
+                              </Border>
+                            </Property>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="jTableKinoPridaniDat.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)&#xa;                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), &quot;selectNextColumnCell&quot;);&#xa;HelperMethods.setTableCellsAndHeaderCenterHorizontalAlignment(jTableKinoPridaniDat);">
+                              <Connection code="tablemodel_kino_pridavanidat" type="code"/>
+                            </Property>
+                            <Property name="cellSelectionEnabled" type="boolean" value="true"/>
+                            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                              <TableColumnModel selectionModel="1"/>
+                            </Property>
+                            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="jButtonKinoPridatData">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="P&#x159;idat kino do datab&#xe1;ze"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonKinoPridatDataActionPerformed"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jPanelKinoVnorenyMazani">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Maz&#xe1;n&#xed; kin">
+                        <Property name="tabTitle" type="java.lang.String" value="Maz&#xe1;n&#xed; kin"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="jScrollPane17" pref="388" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="304" max="-2" attributes="0"/>
+                              <Component id="jButtonKinoSmazatVybrane" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                              <Component id="jScrollPane17" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="jButtonKinoSmazatVybrane" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="252" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane17">
+                      <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                            <EtchetBorder/>
+                          </Border>
+                        </Property>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="jTableKinoVyberKeSmazani">
+                          <Properties>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                              <Connection code="tablemodel_kino_dtb" type="code"/>
+                            </Property>
+                            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                              <JTableSelectionModel selectionMode="2"/>
+                            </Property>
+                            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="javax.swing.JButton" name="jButtonKinoSmazatVybrane">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Smazat vybran&#xe1; kina"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonKinoSmazatVybraneActionPerformed"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="jButtonKinoVyberkina">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Vyber ozna&#x10d;en&#xe1; data"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonKinoVyberkinaActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

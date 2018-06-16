@@ -33,6 +33,7 @@ public class UpravaDatTableModel extends AbstractTableModel {
             data.addElement(col);
         }
         
+        
     }
 
     UpravaDatTableModel(String sqldotaz) {
@@ -101,5 +102,6 @@ public class UpravaDatTableModel extends AbstractTableModel {
         indices.add(columnIndex);
         edited_fields.add(indices);
     }
+   
 
 }
